@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ButtonBar?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ProgressBar?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="623" prefWidth="684" styleClass="navbar" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifes.si.tpa.controller.CarregaArquivo">
+   <center>
+      <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20px; -fx-background-color: white;" BorderPane.alignment="CENTER">
+         <BorderPane.margin>
+            <Insets bottom="5.0" right="7.0" />
+         </BorderPane.margin>
+         <children>
+            <VBox prefHeight="618.0" prefWidth="700.0" spacing="20.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+               <children>
+                  <Label fx:id="err" alignment="CENTER" contentDisplay="TOP" prefHeight="37.0" prefWidth="677.0" text="Mensagem de erro" textFill="RED" VBox.vgrow="NEVER">
+                     <font>
+                        <Font size="25.0" />
+                     </font>
+                  </Label>
+                  <Label maxWidth="145.0" prefHeight="26.0" prefWidth="145.0" text="Caminho do arquivo">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <VBox.margin>
+                        <Insets left="20.0" />
+                     </VBox.margin>
+                  </Label>
+                  <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0">
+                     <buttons>
+                        <TextField fx:id="caminhoFile" editable="false" prefWidth="580.0" promptText="Caminho do arquivo..." />
+                        <Button defaultButton="true" layoutX="599.0" layoutY="17.0" maxWidth="80.0" mnemonicParsing="false" onAction="#actionBuscar" styleClass="nav" text="Buscar" />
+                     </buttons>
+                     <opaqueInsets>
+                        <Insets right="20.0" />
+                     </opaqueInsets>
+                  </ButtonBar>
+                  <HBox alignment="CENTER" spacing="50.0">
+                     <children>
+                      <Button fx:id="carregar" disable="true" maxWidth="-Infinity" mnemonicParsing="false" onAction="#actionCarregar" prefWidth="250.0" styleClass="nav" text="Carregar" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="5.0">
+                     <children>
+                        <ProgressBar fx:id="progressBar" maxHeight="20.0" prefWidth="500.0" progress="0.0" />
+                        <Label fx:id="percent" prefHeight="17.0" prefWidth="41.0" text="100%" textAlignment="RIGHT">
+                           <font>
+                              <Font name="System Bold" size="12.0" />
+                           </font></Label>
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" spacing="50.0">
+                     <children>
+                        <Button fx:id="construirGrafico" disable="true" maxWidth="-Infinity" mnemonicParsing="false" onAction="#actionConstruirGrafico" prefWidth="250.0" styleClass="nav" text="Construir o Gráfico" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+         </children>
+      </AnchorPane>
+   </center>
+</BorderPane>

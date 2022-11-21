@@ -1,0 +1,46 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Launch Main",
+            "request": "launch",
+            "mainClass": "br.edu.ifes.si.tpa.Main",
+            "projectName": "IFES-SI-TPA-Trabalho01-2022_GRUPO-10_dbb80822",
+            "vmArgs": "--module-path \"c:\\Program Files\\Java\\javafx-sdk-19\\lib\" --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics"
+        },
+        {
+            "type": "java",
+            "name": "Launch BouncingBalls",
+            "request": "launch",
+            "mainClass": "javafx_drawsomething.BouncingBalls",
+            "projectName": "IFES-SI-TPA-Trabalho01-2022_GRUPO-10_dbb80822",
+            "vmArgs": "--module-path \"c:\\Program Files\\Java\\javafx-sdk-19\\lib\" --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics"
+        },
+        {
+            "type": "java",
+            "name": "Launch FlowersApp",
+            "request": "launch",
+            "mainClass": "javafx_drawsomething.FlowersApp",
+            "projectName": "IFES-SI-TPA-Trabalho01-2022_GRUPO-10_dbb80822",
+            "vmArgs": "--module-path \"c:\\Program Files\\Java\\javafx-sdk-19\\lib\" --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics"
+        },
+        {
+            "type": "java",
+            "name": "Launch PaintApp",
+            "request": "launch",
+            "mainClass": "teste.PaintApp",
+            "projectName": "IFES-SI-TPA-Trabalho01-2022_GRUPO-10_dbb80822",
+            "vmArgs": "--module-path \"c:\\Program Files\\Java\\javafx-sdk-19\\lib\" --add-modules javafx.base,javafx.controls,javafx.fxml,javafx.graphics"
+        },
+        {
+            "type": "java",
+            "name": "Launch Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        }
+    ]
+}
