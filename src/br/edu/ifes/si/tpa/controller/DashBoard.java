@@ -65,7 +65,7 @@ public class DashBoard {
             }
             Vertice vertice = digrafo.getVertices().get(i);
             // Criando
-            Ball ball = new Ball(posX, posY, String.valueOf(vertice.getID()));
+            Ball ball = new Ball(posX, posY, vertice.getID());
             ball.getStyleClass().add("cor_" + vertice.getAutor().getID());
             root.getChildren().addAll(ball, ((Ball) ball).getToken());
         }

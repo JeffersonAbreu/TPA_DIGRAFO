@@ -25,7 +25,7 @@ public class Digrafo {
         getVertices().get(de).addAdj(new Aresta(de, para));
     }
 
-    public void addVertice(int vert, int autor) {
+    public void addVertice(String vert, int autor) {
         vertices.add(new Vertice(vert, getAutor(autor)));
     }
 
@@ -70,11 +70,11 @@ public class Digrafo {
      * Vertice
      */
     public class Vertice {
-        private int ID;
+        private String ID;
         private Autor dono;
         protected ArrayList<Aresta> adj;
 
-        Vertice(int ID, Autor autor) {
+        Vertice(String ID, Autor autor) {
             this.ID = ID;
             this.dono = autor;
             this.adj = new ArrayList<>();
@@ -84,7 +84,7 @@ public class Digrafo {
             return dono;
         }
 
-        public int getID() {
+        public String getID() {
             return ID;
         }
 

@@ -23,7 +23,7 @@ public class Arquivo {
             digrafo = new Digrafo(vertices);
             for (int i = 0; i < vertices; i++) {
                 StringTokenizer st = new StringTokenizer(in.readLine(), " ");
-                int vertice = Integer.parseInt(st.nextToken().trim()); // verticeInicial
+                String vertice = st.nextToken().trim(); // verticeInicial
                 int donoDoVertice = Integer.parseInt(st.nextToken().trim()); // verticeFinal
                 // System.out.println("Na linha " + i + 3 + " : " + vertice + " - " + donoDoVertice);
                 digrafo.addVertice(vertice, donoDoVertice);

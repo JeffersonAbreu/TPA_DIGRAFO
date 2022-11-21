@@ -65,7 +65,7 @@ public class Ball extends Circle {
    public TextFlow getToken() {
       return token;
    }
-
+/* 
    LinearGradient _gradient_100 = new LinearGradient(
          0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
          new Stop(0.0, new Color(1.0, 0.0, 0.0, 1.0)),
@@ -86,4 +86,6 @@ public class Ball extends Circle {
          0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
          new Stop(0.0, new Color(1.0, 0.0, 0.0, 0.0)),
          new Stop(1.0, new Color(1.0, 0.0, 0.0, 0.0)));
+*/
+   
 }
