@@ -41,27 +41,12 @@ public class Ball extends Circle {
          double newTranslateX = origenTranslateX + offsetX;
          double newTranslateY = origenTranslateY + offsetY;
 
-         ((TextFlow) (t.getSource())).setTranslateX(newTranslateX);
-         ((TextFlow) (t.getSource())).setTranslateY(newTranslateY);
+         ((Ball) (t.getSource())).setTranslateX(newTranslateX);
+         ((Ball) (t.getSource())).setTranslateY(newTranslateY);
 
          // token update
-         this.setLayoutX(newTranslateX);
-         this.setLayoutY(newTranslateY);
-      });
-
-      this.token.setOnMousePressed((t) -> {
-         origenSceneX = t.getSceneX();
-         origenSceneY = t.getSceneY();
-
-         origenTranslateX = ((TextFlow) (t.getSource())).getTranslateX();
-         origenTranslateY = ((TextFlow) (t.getSource())).getTranslateY();
-
-         // ((Ball) (t.getSource())).toFront();
-         // ((TextFlow) (token)).toFront();
-      });
-
-      this.token.setOnMouseDragged((t) -> {
-         
+         this.token.setLayoutX(newTranslateX);
+         this.token.setLayoutY(newTranslateY);
       });
    }
 
@@ -69,7 +54,6 @@ public class Ball extends Circle {
       Text text = new Text(getId());
       text.setFont(Font.font("Arial Black", 26));
       text.setFill(Color.BLACK);
-      text.setCursor(Cursor.MOVE);
       token = new TextFlow(text);
       if (getId().length() == 1)
          token.setTranslateX(this.getCenterX() - 8.5f);
