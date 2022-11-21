@@ -12,7 +12,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="623" prefWidth="684" styleClass="navbar" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifes.si.tpa.controller.CarregaArquivo">
+<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="623" prefWidth="684" styleClass="navbar" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifes.si.tpa.controller.CarregaArquivoController">
    <center>
       <AnchorPane prefHeight="200.0" prefWidth="200.0" style="-fx-background-radius: 20px; -fx-background-color: white;" BorderPane.alignment="CENTER">
          <BorderPane.margin>

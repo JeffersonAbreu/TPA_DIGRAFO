@@ -1,14 +1,15 @@
 package br.edu.ifes.si.tpa.controller;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.edu.ifes.si.tpa.Main;
 import br.edu.ifes.si.tpa.model.design.Digrafo;
+import br.edu.ifes.si.tpa.util.Arquivo;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -25,10 +26,12 @@ public class HomeController {
 
     @FXML
     private Button close;
-    
 
     @FXML
     private BorderPane borderPane;
+
+    // Reference to the main application.
+    private Main mainApp;
 
     @FXML
     void actionCarregaArquivo(MouseEvent event) {
@@ -57,14 +60,25 @@ public class HomeController {
 
     @FXML
     void initialize() {
-        loadUI("dashBoard");
+        String path = new File("./Digrafo1.txt").getAbsolutePath();
+        initializeDash(Arquivo.lerDigrafo(path));
     }
 
+    /**
+     * @param ui
+     */
     private void loadUI(String ui) {
-        Parent root = null;
+        FXMLLoader loader = new FXMLLoader();
+        loader.setLocation(Main.class.getResource("./view/" + ui + ".fxml"));
         try {
-            root = FXMLLoader.load(Main.class.getResource("view/" + ui + ".fxml"));
-            borderPane.setCenter(root);
+            borderPane.setCenter((BorderPane) loader.load());
+            if (ui.equals("carregaArquivo")) {
+                CarregaArquivoController controller = loader.getController();
+                controller.setHomeApp(this);
+            } else if (ui.equals("dashBoard")) {
+                DashBoard controller = loader.getController();
+                controller.setHomeApp(this);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -73,5 +87,18 @@ public class HomeController {
     public void initializeDash(Digrafo digrafo) {
         DIGRAFO = digrafo;
         this.actionHome(null);
+    }
+
+    /**
+     * É chamado pela aplicação principal para referenciar a si mesma.
+     * 
+     * @param mainApp
+     */
+    public void setMainApp(Main mainApp) {
+        this.mainApp = mainApp;
+    }
+
+    public Main getMainApp() {
+        return mainApp;
     }
 }

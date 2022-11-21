@@ -47,7 +47,7 @@ public class Digrafo {
     /**
      * Autor
      */
-    private class Autor implements Comparable {
+    public class Autor implements Comparable {
         private int ID;
 
         public Autor(int id) {
@@ -69,7 +69,7 @@ public class Digrafo {
     /**
      * Vertice
      */
-    private class Vertice {
+    public class Vertice {
         private int ID;
         private Autor dono;
         protected ArrayList<Aresta> adj;
@@ -80,15 +80,15 @@ public class Digrafo {
             this.adj = new ArrayList<>();
         }
 
-        Autor getAutor() {
+        public Autor getAutor() {
             return dono;
         }
 
-        int getID() {
+        public int getID() {
             return ID;
         }
 
-        List<Aresta> getAllAdj() {
+        public List<Aresta> getAllAdj() {
             return adj;
         }
 

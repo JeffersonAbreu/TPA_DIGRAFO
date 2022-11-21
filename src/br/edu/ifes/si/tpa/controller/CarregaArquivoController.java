@@ -1,16 +1,11 @@
 package br.edu.ifes.si.tpa.controller;
 
 import java.io.File;
-import java.math.BigDecimal;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-import javax.management.BadBinaryOpValueExpException;
-
-import br.edu.ifes.si.tpa.Main;
 import br.edu.ifes.si.tpa.model.design.Digrafo;
 import br.edu.ifes.si.tpa.util.Arquivo;
-import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +16,7 @@ import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
-public class CarregaArquivo {
+public class CarregaArquivoController {
 
     @FXML
     private ResourceBundle resources;
@@ -43,6 +38,7 @@ public class CarregaArquivo {
     double progress = 0.0f;
 
     private Digrafo digrafo;
+    private HomeController homeApp;
 
     @FXML
     public void initialize() {
@@ -71,7 +67,7 @@ public class CarregaArquivo {
         fileChooser.setTitle("Selecione o arquivo");
         fileChooser.setInitialDirectory(new File("./"));
 
-        File file = fileChooser.showOpenDialog(Main.getPrimaryStage());
+        File file = fileChooser.showOpenDialog(homeApp.getMainApp().getPrimaryStage());
         if (file != null) {
             caminhoFile.setText(file.getAbsolutePath());
             carregar.setDisable(false);
@@ -89,32 +85,12 @@ public class CarregaArquivo {
         if (digrafo == null) {
             err.setVisible(true);
         } else {
-            // while (progress < 1) {
-            // progress += 0.1f;
-            // progressBar.setProgress(progress);
-            // percent.setText(((int) Math.round(progress * 100)) + "%");
-            // // espera um pouco
-            // try {
-            // Thread.sleep(50);
-            // } catch (InterruptedException e) {
-            // // TODO Auto-generated catch block
-            // e.printStackTrace();
-            // }
-            // }
-            // caminhoFile.setText("");
-            // System.out.println("Carregouuuuuuuu ! ! ! ! !\n");
-            // System.out.println(" _____[]_____");
-            // System.out.println(" /\\ \\");
-            // System.out.println("/ \\___________\\");
-            // System.out.println("| | [] [] [] |");
-            // System.out.println("|[ ]|__________|");
-            // construirGrafico.setVisible(true);
-            startProgresso();
+            startMyProgressBar();
         }
         this.digrafo = digrafo;
     }
 
-    void startProgresso() {
+    void startMyProgressBar() {
         // Create a background Task
         Task<Void> task = new Task<Void>() {
             @Override
@@ -166,6 +142,15 @@ public class CarregaArquivo {
 
     @FXML
     void actionConstruirGrafico() {
+        homeApp.initializeDash(digrafo);
+    }
 
+    /**
+     * É chamado pela aplicação principal para referenciar a si mesma.
+     * 
+     * @param homeApp
+     */
+    public void setHomeApp(HomeController homeApp) {
+        this.homeApp = homeApp;
     }
 }

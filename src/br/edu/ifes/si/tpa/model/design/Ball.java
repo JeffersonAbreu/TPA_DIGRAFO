@@ -1,75 +1,84 @@
 package br.edu.ifes.si.tpa.model.design;
 
-import javafx.event.EventHandler;
 import javafx.scene.Cursor;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.CycleMethod;
 import javafx.scene.paint.LinearGradient;
 import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
+import javafx.scene.text.Font;
 import javafx.scene.text.Text;
+import javafx.scene.text.TextFlow;
 
 public class Ball extends Circle {
-   private double radius = 24.0f;
-   private double size;
-   private Text token;
+   private TextFlow token;
 
-   double orgSceneX, orgSceneY;
-   double orgTranslateX, orgTranslateY;
+   double origenSceneX, origenSceneY;
+   double origenTranslateX, origenTranslateY;
 
-   public Ball(int posX, int posY, String value) {
+   public Ball(int posX, int posY, String ID) {
       super(22.0f, Color.RED);
       super.setCursor(Cursor.MOVE);
       super.setCenterX(posX);
       super.setCenterY(posY);
+      setId(ID);
+      createToken();
 
-      this.size = 24.0f; // colocar valor multiplo de 8
-      this.radius = this.size / 2;
-      double tX = 0, tY = posY + (radius / 2) + 1;
-      tX = value.length() == 1 ? posX - radius + 2 : posX + 3 - radius * 2;
-      this.token = new Text(tX, tY, value);
-      this.token.getStyleClass().add("token");
+      this.setOnMousePressed((t) -> {
+         origenSceneX = t.getSceneX();
+         origenSceneY = t.getSceneY();
 
-      this.setOnMousePressed(new EventHandler<MouseEvent>() {
-         @Override
-         public void handle(MouseEvent t) {
-            orgSceneX = t.getSceneX();
-            orgSceneY = t.getSceneY();
-            orgTranslateX = ((Ball) (t.getSource())).getTranslateX();
-            orgTranslateY = ((Ball) (t.getSource())).getTranslateY();
+         origenTranslateX = ((Ball) (t.getSource())).getTranslateX();
+         origenTranslateY = ((Ball) (t.getSource())).getTranslateY();
 
-            ((Ball) (t.getSource())).toFront();
-            ((Text) token).toFront();
-         }
+         ((Ball) (t.getSource())).toFront();
+         ((TextFlow) (token)).toFront();
       });
 
-      this.setOnMouseDragged(new EventHandler<MouseEvent>() {
-         @Override
-         public void handle(MouseEvent t) {
-            double offsetX = t.getSceneX() - orgSceneX;
-            double offsetY = t.getSceneY() - orgSceneY;
-            double newTranslateX = orgTranslateX + offsetX;
-            double newTranslateY = orgTranslateY + offsetY;
+      this.setOnMouseDragged((t) -> {
+         double offsetX = t.getSceneX() - origenSceneX;
+         double offsetY = t.getSceneY() - origenSceneY;
+         double newTranslateX = origenTranslateX + offsetX;
+         double newTranslateY = origenTranslateY + offsetY;
 
-            ((Ball) (t.getSource())).setTranslateX(newTranslateX);
-            ((Ball) (t.getSource())).setTranslateY(newTranslateY);
+         ((TextFlow) (t.getSource())).setTranslateX(newTranslateX);
+         ((TextFlow) (t.getSource())).setTranslateY(newTranslateY);
 
-            // token update
-            token.setLayoutX(newTranslateX);
-            token.setLayoutY(newTranslateY);
-         }
+         // token update
+         this.setLayoutX(newTranslateX);
+         this.setLayoutY(newTranslateY);
       });
 
-      this.setOnMouseReleased(new EventHandler<MouseEvent>() {
-         @Override
-         public void handle(MouseEvent t) {
-            // token.setVisible(true);
-         }
+      this.token.setOnMousePressed((t) -> {
+         origenSceneX = t.getSceneX();
+         origenSceneY = t.getSceneY();
+
+         origenTranslateX = ((TextFlow) (t.getSource())).getTranslateX();
+         origenTranslateY = ((TextFlow) (t.getSource())).getTranslateY();
+
+         // ((Ball) (t.getSource())).toFront();
+         // ((TextFlow) (token)).toFront();
+      });
+
+      this.token.setOnMouseDragged((t) -> {
+         
       });
    }
 
-   public Text getToken() {
+   private void createToken() {
+      Text text = new Text(getId());
+      text.setFont(Font.font("Arial Black", 26));
+      text.setFill(Color.BLACK);
+      text.setCursor(Cursor.MOVE);
+      token = new TextFlow(text);
+      if (getId().length() == 1)
+         token.setTranslateX(this.getCenterX() - 8.5f);
+      else
+         token.setTranslateX(this.getCenterX() - 17.0f);
+      token.setTranslateY(this.getCenterY() - 17.0f);
+   }
+
+   public TextFlow getToken() {
       return token;
    }
 

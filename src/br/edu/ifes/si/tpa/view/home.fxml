@@ -10,6 +10,9 @@
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.paint.Color?>
+<?import javafx.scene.paint.LinearGradient?>
+<?import javafx.scene.paint.Stop?>
 <?import javafx.scene.text.Font?>
 
 <BorderPane fx:id="borderPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="640" prefWidth="937.0" stylesheets="@css/style.css" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifes.si.tpa.controller.HomeController">
@@ -132,10 +135,26 @@
          <children>
             <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="681.0">
                <children>
-                  <Label layoutX="91.0" layoutY="-1.0" prefHeight="47.0" prefWidth="217.0" style="-fx-font-family: &quot;Times New Roman&quot;, Times, serif; -fx-font-size: 36;" text="D I G R A F O" textFill="WHITE" AnchorPane.leftAnchor="91.0">
+                  <Label layoutX="91.0" layoutY="-1.0" prefHeight="47.0" prefWidth="217.0" style="-fx-font-family: &quot;Times New Roman&quot;, Times, serif; -fx-font-size: 36;" text="D Í G R A F O" AnchorPane.leftAnchor="91.0">
                      <font>
                         <Font name="Courier New Bold" size="48.0" />
                      </font>
+                     <textFill>
+                        <LinearGradient endX="1.0" endY="1.0">
+                           <stops>
+                              <Stop>
+                                 <color>
+                                    <Color red="0.012244151905179024" green="0.8815789222717285" blue="0.055710893124341965" />
+                                 </color>
+                              </Stop>
+                              <Stop offset="1.0">
+                                 <color>
+                                    <Color green="0.75" blue="0.012500000186264515" opacity="0.6870229244232178" />
+                                 </color>
+                              </Stop>
+                           </stops>
+                        </LinearGradient>
+                     </textFill>
                   </Label>
                </children>
             </AnchorPane>
