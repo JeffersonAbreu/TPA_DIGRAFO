@@ -3,50 +3,62 @@ package br.edu.ifes.si.tpa.model.design;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-//alterar
+
 public class In {
-    public static Digrafo lerDigrafo(String pathToFile) { // atualizado
+    private BufferedReader in = null;
+    private String nomeFile;
 
-        String path = pathToFile;
-        BufferedReader in = null;
-        Digrafo digrafo = null;
+    public In(String pathToFile) {
+        if (pathToFile == null)
+            throw new NullPointerException("argument is null");
         try {
-            in = new BufferedReader(new FileReader(path));
-            int vertices = Integer.parseInt(in.readLine());
-            int arestas = Integer.parseInt(in.readLine());
-
-            digrafo = new Digrafo(vertices);
-            for (int i = 0; i < vertices; i++) {
-                StringTokenizer st = new StringTokenizer(in.readLine(), " ");
-                String vertice = st.nextToken().trim(); // verticeInicial
-                int donoDoVertice = Integer.parseInt(st.nextToken().trim()); // verticeFinal
-                // System.out.println("Na linha " + i + 3 + " : " + vertice + " - " + donoDoVertice);
-                digrafo.addVertice(vertice, donoDoVertice);
-            }
-
-            // System.out.println("\nArestas: " + arestas);
-            for (int i = 0; i < arestas; i++) {
-                StringTokenizer st = new StringTokenizer(in.readLine(), " ");
-                int de = Integer.parseInt(st.nextToken().trim()); // arestaInicial
-                int para = Integer.parseInt(st.nextToken().trim()); // arestaFinal
-                // System.out.println(i + 1 + " : " + de + " - " + para);
-                digrafo.addAresta(de, para);
-            }
-        } catch (Exception e) {
-            System.out.println("Error while reading a file.");
-        } finally {
-            // fechar o arquivo
-            if (in != null) {
-                try {
-                    in.close();
-                } catch (IOException ex) {
-                    Logger.getLogger(In.class.getName()).log(Level.SEVERE, null, ex);
-                }
-            }
+            nomeFile = pathToFile;
+            in = new BufferedReader(new FileReader(pathToFile));
+        } catch (IOException e) {
+            System.out.println("Error while reading a file " + pathToFile);
         }
-        return digrafo;
+    }
+
+    /**
+     * Reads and returns the next line in this input stream.
+     *
+     * @return the next line in this input stream; <tt>null</tt> if no such line
+     */
+    public String readLine() {
+        String line;
+        try {
+            line = in.readLine();
+        } catch (IOException e) {
+            line = null;
+        }
+        return line;
+    }
+
+    public String getPathName() {
+        return nomeFile;
+    }
+
+    /**
+     * Returns true if this input stream exists.
+     *
+     * @return <tt>true</tt> if this input stream exists; <tt>false</tt> otherwise
+     */
+    public boolean exists() {
+        boolean exists = in != null;
+        if (!exists) {
+            System.err.println("Arquivo não existe!\n" + nomeFile);
+        }
+        return exists;
+    }
+
+    /**
+     * Closes this input stream.
+     */
+    public void close() {
+        try {
+            in.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }

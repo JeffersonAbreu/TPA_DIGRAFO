@@ -37,7 +37,7 @@
                   <ButtonBar nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0">
                      <buttons>
                         <TextField fx:id="caminhoFile" editable="false" prefWidth="580.0" promptText="Caminho do arquivo..." />
-                        <Button defaultButton="true" layoutX="599.0" layoutY="17.0" maxWidth="80.0" mnemonicParsing="false" onAction="#actionBuscar" styleClass="nav" text="Buscar" />
+                        <Button fx:id="buscar" defaultButton="true" layoutX="599.0" layoutY="17.0" maxWidth="80.0" mnemonicParsing="false" onAction="#actionBuscar" styleClass="nav" text="Buscar" />
                      </buttons>
                      <opaqueInsets>
                         <Insets right="20.0" />

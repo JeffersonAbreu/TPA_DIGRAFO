@@ -1,11 +1,9 @@
 package br.edu.ifes.si.tpa.controller;
 
 import java.io.File;
-import java.net.URL;
-import java.util.ResourceBundle;
 
-import br.edu.ifes.si.tpa.model.design.Digrafo;
 import br.edu.ifes.si.tpa.model.design.In;
+import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -17,12 +15,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.FileChooser.ExtensionFilter;
 
 public class CarregaArquivoController {
-
-    @FXML
-    private ResourceBundle resources;
-    @FXML
-    private URL location;
-
     @FXML
     private TextField caminhoFile;
 
@@ -30,14 +22,12 @@ public class CarregaArquivoController {
     private Label err, percent;
 
     @FXML
-    private Button carregar, construirGrafico;
+    private Button carregar, construirGrafico, buscar;
 
     @FXML
     private ProgressBar progressBar;
 
-    double progress = 0.0f;
-
-    private Digrafo digrafo;
+    private In in;
     private HomeController homeApp;
 
     @FXML
@@ -51,12 +41,11 @@ public class CarregaArquivoController {
     }
 
     @FXML
-    void actionBuscar(ActionEvent event) {
+    private void actionBuscar(ActionEvent event) {
         err.setVisible(false);
-        progress = ProgressBar.INDETERMINATE_PROGRESS;
-        progressBar.setProgress(progress);
         construirGrafico.setVisible(false);
-        percent.setText("0%");
+        percent.setText("");
+        buscar.setDisable(true);
 
         FileChooser fileChooser = new FileChooser();
         // Define um filtro de extensão
@@ -65,7 +54,7 @@ public class CarregaArquivoController {
 
         // Mostra a janela de salvar arquivo e iniciar no ditetorio raiz do app
         fileChooser.setTitle("Selecione o arquivo");
-        fileChooser.setInitialDirectory(new File("./_dados"));
+        fileChooser.setInitialDirectory(new File("_dados"));
 
         File file = fileChooser.showOpenDialog(homeApp.getMainApp().getPrimaryStage());
         if (file != null) {
@@ -79,53 +68,58 @@ public class CarregaArquivoController {
     }
 
     @FXML
-    void actionCarregar(ActionEvent event) {
+    private void actionCarregar(ActionEvent event) {
         carregar.setDisable(true);
-        Digrafo digrafo = In.lerDigrafo(caminhoFile.getText());
-        if (digrafo == null) {
-            err.setVisible(true);
-        } else {
+        System.out.println(caminhoFile.getText());
+        in = new In(caminhoFile.getText());
+        if (in.exists()) {
             startMyProgressBar();
+        } else {
+            err.setVisible(true);
         }
-        this.digrafo = digrafo;
     }
 
-    void startMyProgressBar() {
+    private void startMyProgressBar() {
         // Create a background Task
+        In test = new In(in.getPathName());
         Task<Void> task = new Task<Void>() {
             @Override
             protected Void call() throws Exception {
-
                 // Set the total number of steps in our process
                 int steps = 1000;
 
                 // Simulate a long running task
                 for (int i = 0; i <= steps; i++) {
 
-                    Thread.sleep(3); // Pause briefly
+                    Thread.sleep(1); // Pause briefly
 
                     // Update our progress and message properties
                     updateProgress(i, steps);
                     updateMessage(i / 10 + "%");
                 }
+
+                int v = Integer.valueOf(test.readLine());// lendo vertices
+                int a = Integer.valueOf(test.readLine());// lendo arestas
+                int d = v + a;
+                for (int i = 0; i < d; i++) {
+                    test.readLine();
+                }
+                test.close();
                 return null;
             }
         };
 
         // This method allows us to handle any Exceptions thrown by the task
         task.setOnFailed(wse -> {
+            err.setVisible(true);
+            in.close();
             wse.getSource().getException().printStackTrace();
+            Platform.exit();
         });
 
         // If the task completed successfully, perform other updates here
         task.setOnSucceeded(wse -> {
-            caminhoFile.setText("");
             System.out.println("Carregouuuuuuuu ! ! ! ! !\n");
-            System.out.println("  _____[]_____");
-            System.out.println(" /\\           \\");
-            System.out.println("/  \\___________\\");
-            System.out.println("| _ | [] [] [] |");
-            System.out.println("|[ ]|__________|");
             construirGrafico.setVisible(true);
             construirGrafico.setDefaultButton(true);
             construirGrafico.setDisable(false);
@@ -141,8 +135,8 @@ public class CarregaArquivoController {
     }
 
     @FXML
-    void actionConstruirGrafico() {
-        homeApp.initializeDash(digrafo);
+    private void actionConstruirGrafico() {
+        homeApp.toDashBoard(in);
     }
 
     /**

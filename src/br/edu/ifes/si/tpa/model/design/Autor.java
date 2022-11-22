@@ -1,6 +1,6 @@
 package br.edu.ifes.si.tpa.model.design;
 
-public class Autor implements Comparable {
+public class Autor implements Comparable<Autor> {
     private int ID;
 
         public Autor(int id) {
@@ -12,8 +12,8 @@ public class Autor implements Comparable {
         }
 
         @Override
-        public int compareTo(Object o) {
-            if (this.ID == ((Autor) o).getID())
+        public int compareTo(Autor autor) {
+            if (this.ID == autor.getID())
                 return 1;
             return 0;
         }

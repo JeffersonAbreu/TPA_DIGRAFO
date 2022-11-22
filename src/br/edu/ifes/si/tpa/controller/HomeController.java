@@ -2,11 +2,8 @@ package br.edu.ifes.si.tpa.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.URL;
-import java.util.ResourceBundle;
 
 import br.edu.ifes.si.tpa.Main;
-import br.edu.ifes.si.tpa.model.design.Digrafo;
 import br.edu.ifes.si.tpa.model.design.In;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -17,12 +14,6 @@ import javafx.stage.Stage;
 
 public class HomeController {
     boolean closeAtivo = false;
-    static Digrafo DIGRAFO = null;
-
-    @FXML
-    private ResourceBundle resources;
-    @FXML
-    private URL location;
 
     @FXML
     private Button close;
@@ -35,7 +26,7 @@ public class HomeController {
 
     @FXML
     void actionCarregaArquivo(MouseEvent event) {
-        loadUI("carregaArquivo");
+        ((CarregaArquivoController) loadUI("carregaArquivo")).setHomeApp(this);
     }
 
     @FXML
@@ -51,42 +42,30 @@ public class HomeController {
 
     @FXML
     void closePrint(MouseEvent event) {
-        if (!closeAtivo) {
-
-        } else {
-        }
         closeAtivo = !closeAtivo;
     }
 
     @FXML
     void initialize() {
-        String path = new File("./_dados/Digrafo1.txt").getAbsolutePath();
-        initializeDash(In.lerDigrafo(path));
     }
 
     /**
      * @param ui
      */
-    private void loadUI(String ui) {
+    private Object loadUI(String ui) {
         FXMLLoader loader = new FXMLLoader();
         loader.setLocation(Main.class.getResource("./view/" + ui + ".fxml"));
         try {
             borderPane.setCenter((BorderPane) loader.load());
-            if (ui.equals("carregaArquivo")) {
-                CarregaArquivoController controller = loader.getController();
-                controller.setHomeApp(this);
-            } else if (ui.equals("dashBoard")) {
-                DashBoard controller = loader.getController();
-                controller.setHomeApp(this);
-            }
+            return loader.getController();
         } catch (IOException e) {
             e.printStackTrace();
         }
+        return null;
     }
 
-    public void initializeDash(Digrafo digrafo) {
-        DIGRAFO = digrafo;
-        this.actionHome(null);
+    public void toDashBoard(In in) {
+        ((DashBoard) loadUI("dashBoard")).start(in);
     }
 
     /**

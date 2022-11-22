@@ -2,9 +2,6 @@ package br.edu.ifes.si.tpa.model.design;
 
 import javafx.scene.Cursor;
 import javafx.scene.paint.Color;
-import javafx.scene.paint.CycleMethod;
-import javafx.scene.paint.LinearGradient;
-import javafx.scene.paint.Stop;
 import javafx.scene.shape.Circle;
 import javafx.scene.text.Font;
 import javafx.scene.text.Text;
@@ -16,6 +13,17 @@ public class Ball extends Circle {
    double origenSceneX, origenSceneY;
    double origenTranslateX, origenTranslateY;
 
+   private int positionX;
+   private int positionY;
+
+   public int getPositionX() {
+      return positionX;
+   }
+
+   public int getPositionY() {
+      return positionY;
+   }
+
    public Ball(int posX, int posY, String ID) {
       super(22.0f, Color.RED);
       super.setCursor(Cursor.MOVE);
@@ -23,6 +31,8 @@ public class Ball extends Circle {
       super.setCenterY(posY);
       setId(ID);
       createToken();
+      positionX = posX;
+      positionY = posY;
 
       this.setOnMousePressed((t) -> {
          origenSceneX = t.getSceneX();
@@ -43,7 +53,9 @@ public class Ball extends Circle {
 
          ((Ball) (t.getSource())).setTranslateX(newTranslateX);
          ((Ball) (t.getSource())).setTranslateY(newTranslateY);
-
+         positionX = (int) (this.getCenterX() + newTranslateX);
+         positionY = (int) (this.getCenterY() + newTranslateY);
+         System.out.println("\nposition ID " + this.getId() + " => " + positionX + ":" + positionY);
          // token update
          this.token.setLayoutX(newTranslateX);
          this.token.setLayoutY(newTranslateY);
@@ -65,27 +77,27 @@ public class Ball extends Circle {
    public TextFlow getToken() {
       return token;
    }
-/* 
-   LinearGradient _gradient_100 = new LinearGradient(
-         0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
-         new Stop(0.0, new Color(1.0, 0.0, 0.0, 1.0)),
-         new Stop(1.0, new Color(1.0, 0.0, 0.0, 1.0)));
-   LinearGradient _gradient_75 = new LinearGradient(
-         0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
-         new Stop(0.0, new Color(1.0, 0.0, 0.0, 1.0)),
-         new Stop(1.0, new Color(1.0, 0.0, 0.0, 0.5)));
-   LinearGradient _gradient_50 = new LinearGradient(
-         0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
-         new Stop(0.0, new Color(1.0, 0.0, 0.0, 1.0)),
-         new Stop(1.0, new Color(1.0, 0.0, 0.0, 0.0)));
-   LinearGradient _gradient_25 = new LinearGradient(
-         0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
-         new Stop(0.0, new Color(1.0, 0.0, 0.0, 0.5)),
-         new Stop(1.0, new Color(1.0, 0.0, 0.0, 0.0)));
-   LinearGradient _gradient_00 = new LinearGradient(
-         0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
-         new Stop(0.0, new Color(1.0, 0.0, 0.0, 0.0)),
-         new Stop(1.0, new Color(1.0, 0.0, 0.0, 0.0)));
-*/
-   
+   /*
+    * LinearGradient _gradient_100 = new LinearGradient(
+    * 0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
+    * new Stop(0.0, new Color(1.0, 0.0, 0.0, 1.0)),
+    * new Stop(1.0, new Color(1.0, 0.0, 0.0, 1.0)));
+    * LinearGradient _gradient_75 = new LinearGradient(
+    * 0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
+    * new Stop(0.0, new Color(1.0, 0.0, 0.0, 1.0)),
+    * new Stop(1.0, new Color(1.0, 0.0, 0.0, 0.5)));
+    * LinearGradient _gradient_50 = new LinearGradient(
+    * 0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
+    * new Stop(0.0, new Color(1.0, 0.0, 0.0, 1.0)),
+    * new Stop(1.0, new Color(1.0, 0.0, 0.0, 0.0)));
+    * LinearGradient _gradient_25 = new LinearGradient(
+    * 0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
+    * new Stop(0.0, new Color(1.0, 0.0, 0.0, 0.5)),
+    * new Stop(1.0, new Color(1.0, 0.0, 0.0, 0.0)));
+    * LinearGradient _gradient_00 = new LinearGradient(
+    * 0.0, 0.2114, 0.817, 0.8517, true, CycleMethod.REFLECT,
+    * new Stop(0.0, new Color(1.0, 0.0, 0.0, 0.0)),
+    * new Stop(1.0, new Color(1.0, 0.0, 0.0, 0.0)));
+    */
+
 }
