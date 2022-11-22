@@ -7,7 +7,7 @@
  *
  ******************************************************************************/
 
-package br.edu.ifes.si.tpa.model;
+package br.edu.ifes.si.tpa.model.domain;
 
 import java.io.BufferedInputStream;
 import java.io.File;

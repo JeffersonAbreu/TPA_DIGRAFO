@@ -5,7 +5,7 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 import br.edu.ifes.si.tpa.model.design.Digrafo;
-import br.edu.ifes.si.tpa.util.Arquivo;
+import br.edu.ifes.si.tpa.model.design.In;
 import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -65,7 +65,7 @@ public class CarregaArquivoController {
 
         // Mostra a janela de salvar arquivo e iniciar no ditetorio raiz do app
         fileChooser.setTitle("Selecione o arquivo");
-        fileChooser.setInitialDirectory(new File("./"));
+        fileChooser.setInitialDirectory(new File("./_dados"));
 
         File file = fileChooser.showOpenDialog(homeApp.getMainApp().getPrimaryStage());
         if (file != null) {
@@ -81,7 +81,7 @@ public class CarregaArquivoController {
     @FXML
     void actionCarregar(ActionEvent event) {
         carregar.setDisable(true);
-        Digrafo digrafo = Arquivo.lerDigrafo(caminhoFile.getText());
+        Digrafo digrafo = In.lerDigrafo(caminhoFile.getText());
         if (digrafo == null) {
             err.setVisible(true);
         } else {

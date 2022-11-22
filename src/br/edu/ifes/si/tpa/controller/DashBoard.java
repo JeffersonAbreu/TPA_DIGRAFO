@@ -7,7 +7,7 @@ import javax.imageio.ImageIO;
 
 import br.edu.ifes.si.tpa.model.design.Ball;
 import br.edu.ifes.si.tpa.model.design.Digrafo;
-import br.edu.ifes.si.tpa.model.design.Digrafo.Vertice;
+import br.edu.ifes.si.tpa.model.design.Vertice;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;

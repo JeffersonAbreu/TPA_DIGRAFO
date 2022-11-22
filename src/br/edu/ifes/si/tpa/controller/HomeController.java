@@ -7,7 +7,7 @@ import java.util.ResourceBundle;
 
 import br.edu.ifes.si.tpa.Main;
 import br.edu.ifes.si.tpa.model.design.Digrafo;
-import br.edu.ifes.si.tpa.util.Arquivo;
+import br.edu.ifes.si.tpa.model.design.In;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
@@ -60,8 +60,8 @@ public class HomeController {
 
     @FXML
     void initialize() {
-        String path = new File("./Digrafo1.txt").getAbsolutePath();
-        initializeDash(Arquivo.lerDigrafo(path));
+        String path = new File("./_dados/Digrafo1.txt").getAbsolutePath();
+        initializeDash(In.lerDigrafo(path));
     }
 
     /**

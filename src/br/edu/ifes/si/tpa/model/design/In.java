@@ -1,4 +1,4 @@
-package br.edu.ifes.si.tpa.util;
+package br.edu.ifes.si.tpa.model.design;
 
 import java.io.BufferedReader;
 import java.io.FileReader;
@@ -6,10 +6,8 @@ import java.io.IOException;
 import java.util.StringTokenizer;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import br.edu.ifes.si.tpa.model.design.Digrafo;
-
-public class Arquivo {
+//alterar
+public class In {
     public static Digrafo lerDigrafo(String pathToFile) { // atualizado
 
         String path = pathToFile;
@@ -45,7 +43,7 @@ public class Arquivo {
                 try {
                     in.close();
                 } catch (IOException ex) {
-                    Logger.getLogger(Arquivo.class.getName()).log(Level.SEVERE, null, ex);
+                    Logger.getLogger(In.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
         }
