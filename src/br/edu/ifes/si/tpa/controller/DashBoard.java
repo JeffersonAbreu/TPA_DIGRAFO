@@ -9,10 +9,11 @@ import java.util.StringTokenizer;
 import javax.imageio.ImageIO;
 
 import br.edu.ifes.si.tpa.model.design.Ball;
-import br.edu.ifes.si.tpa.model.design.Digrafo;
+import br.edu.ifes.si.tpa.model.design.Grafico;
 import br.edu.ifes.si.tpa.model.design.In;
 import br.edu.ifes.si.tpa.model.design.Out;
 import br.edu.ifes.si.tpa.model.design.Vertice;
+import br.edu.ifes.si.tpa.model.domain.Aresta;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -21,7 +22,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
 
 public class DashBoard {
-    private Digrafo digrafo;
+    private Grafico graficoDesenho;
     private int width = 680;
     private int height = 580;
     private List<String> listPositions;
@@ -45,14 +46,15 @@ public class DashBoard {
         int vertices = Integer.parseInt(in.readLine());
         int arestas = Integer.parseInt(in.readLine());
 
-        digrafo = new Digrafo(vertices);
+        // inicia o desenho com x vertices
+        graficoDesenho = new Grafico(vertices);
 
         for (int i = 0; i < vertices; i++) {
             String a = in.readLine();
             StringTokenizer st = new StringTokenizer(a, " ");
             String vertice = st.nextToken().trim(); // verticeInicial
             int donoDoVertice = Integer.parseInt(st.nextToken().trim()); // verticeFinal
-            digrafo.addVertice(vertice, donoDoVertice);
+            graficoDesenho.addVertice(vertice, donoDoVertice);
         }
 
         // System.out.println("\nArestas: " + arestas);
@@ -61,7 +63,7 @@ public class DashBoard {
             int de = Integer.parseInt(st.nextToken().trim()); // arestaInicial
             int para = Integer.parseInt(st.nextToken().trim()); // arestaFinal
             // System.out.println(i + 1 + " : " + de + " - " + para);
-            digrafo.addAresta(de, para);
+            graficoDesenho.addAresta(de, para);
         }
 
         listBall = new ArrayList<>(vertices);
@@ -87,7 +89,7 @@ public class DashBoard {
         System.out.println(HomeController.class.getSimpleName() + " >> " + "load(boolean)");
         Random random = new Random();
         int posY = 0, posX = 0;
-        for (int i = 0; i < digrafo.getVertices().size(); i++) {
+        for (int i = 0; i < graficoDesenho.getVertices().size(); i++) {
             // posição aleatoria para a bola iniciar
             if (aleatoria) {
                 posY = random.nextInt(height / 2) + random.nextInt(height / 2);
@@ -98,7 +100,7 @@ public class DashBoard {
                 posX = Integer.parseInt(st.nextToken().trim()); // X
                 posY = Integer.parseInt(st.nextToken().trim()); // Y
             }
-            Vertice vertice = digrafo.getVertices().get(i);
+            Vertice vertice = graficoDesenho.getVertices().get(i);
             // Criando
             Ball ball = new Ball(posX, posY, vertice.getID());
             ball.getStyleClass().add("cor_" + vertice.getAutor().getID());

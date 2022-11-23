@@ -55,7 +55,7 @@ public class Ball extends Circle {
          ((Ball) (t.getSource())).setTranslateY(newTranslateY);
          positionX = (int) (this.getCenterX() + newTranslateX);
          positionY = (int) (this.getCenterY() + newTranslateY);
-         System.out.println("\nposition ID " + this.getId() + " => " + positionX + ":" + positionY);
+         // System.out.println("position ID " + this.getId() + " => " + positionX + ":" + positionY);
          // token update
          this.token.setLayoutX(newTranslateX);
          this.token.setLayoutY(newTranslateY);

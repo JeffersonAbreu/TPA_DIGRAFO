@@ -18,6 +18,7 @@ public class Out {
             throw new NullPointerException("argument is null");
         try {
             out = new BufferedWriter(new FileWriter(pathToFile));
+            out.flush();
         } catch (IOException e) {
             System.out.println("Error while reading a file " + pathToFile);
         }

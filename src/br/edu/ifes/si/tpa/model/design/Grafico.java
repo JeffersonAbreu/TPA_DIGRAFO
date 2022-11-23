@@ -4,11 +4,11 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class Digrafo {
+public class Grafico {
     private HashMap<Integer, Autor> autores;
     private List<Vertice> vertices;
     
-    public Digrafo(int nVertices) {
+    public Grafico(int nVertices) {
         autores = new HashMap<>();
         vertices = new ArrayList<>(nVertices);
     }

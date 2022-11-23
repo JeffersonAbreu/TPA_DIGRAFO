@@ -1,6 +1,5 @@
 package br.edu.ifes.si.tpa.controller;
 
-import java.io.File;
 import java.io.IOException;
 
 import br.edu.ifes.si.tpa.Main;
