@@ -9,7 +9,7 @@
 
 <BorderPane maxHeight="-Infinity" maxWidth="-Infinity" prefHeight="623" prefWidth="684" styleClass="navbar" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifes.si.tpa.controller.DashBoard">
    <center>
-      <AnchorPane fx:id="root" style="-fx-background-radius: 20px; -fx-background-color: white; -fx-border-color: red;" stylesheets="@css/ball.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="painel" minHeight="548.0" minWidth="680.0" stylesheets="@css/ball.css" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="5.0" right="7.0" />
          </BorderPane.margin>
@@ -23,7 +23,6 @@
         <buttons>
             <Button maxWidth="80.0" mnemonicParsing="false" onAction="#actionSalvePositions" styleClass="nav" text="Salvar Posição" />
             <Button maxWidth="80.0" mnemonicParsing="false" onAction="#actionSalveToImage" styleClass="nav" text="Salvar Image" />
-            <Button maxWidth="80.0" mnemonicParsing="false" onAction="#actionSortAleatory" styleClass="nav" text="Aleatório" />
         </buttons>
          <opaqueInsets>
             <Insets />

@@ -4,29 +4,29 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Vertice {
-    private String ID;
-        private Autor dono;
-        protected ArrayList<Aresta> adj;
+    private int ID;
+    private Autor dono;
+    protected ArrayList<Aresta> adj;
 
-        Vertice(String ID, Autor autor) {
-            this.ID = ID;
-            this.dono = autor;
-            this.adj = new ArrayList<>();
-        }
+    Vertice(int ID, Autor autor) {
+        this.ID = ID;
+        this.dono = autor;
+        this.adj = new ArrayList<Aresta>();
+    }
 
-        public Autor getAutor() {
-            return dono;
-        }
+    public Autor getAutor() {
+        return dono;
+    }
 
-        public String getID() {
-            return ID;
-        }
+    public int getID() {
+        return ID;
+    }
 
-        public List<Aresta> getAllAdj() {
-            return adj;
-        }
+    public List<Aresta> getAllAdj() {
+        return adj;
+    }
 
-        void addAdj(Aresta a) {
-            adj.add(0, a);
-        }
+    void addAdj(Aresta a) {
+        adj.add(a);
+    }
 }

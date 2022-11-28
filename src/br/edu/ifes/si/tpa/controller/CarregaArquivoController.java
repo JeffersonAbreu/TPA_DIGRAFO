@@ -70,7 +70,6 @@ public class CarregaArquivoController {
     @FXML
     private void actionCarregar(ActionEvent event) {
         carregar.setDisable(true);
-        System.out.println(caminhoFile.getText());
         in = new In(caminhoFile.getText());
         if (in.exists()) {
             startMyProgressBar();
@@ -86,7 +85,7 @@ public class CarregaArquivoController {
             @Override
             protected Void call() throws Exception {
                 // Set the total number of steps in our process
-                int steps = 1000;
+                int steps = 1000;//1000
 
                 // Simulate a long running task
                 for (int i = 0; i <= steps; i++) {
@@ -119,7 +118,6 @@ public class CarregaArquivoController {
 
         // If the task completed successfully, perform other updates here
         task.setOnSucceeded(wse -> {
-            System.out.println("Carregouuuuuuuu ! ! ! ! !\n");
             construirGrafico.setVisible(true);
             construirGrafico.setDefaultButton(true);
             construirGrafico.setDisable(false);
