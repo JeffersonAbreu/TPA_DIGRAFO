@@ -1,9 +1,9 @@
 # Compiled class file
 *.class
 /bin
-/_dados/*.ini
+#/_dados/*.ini
 /_dados/*.png
-/src/application
+#/src/application
 
 # Log file
 *.log

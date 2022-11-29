@@ -134,7 +134,7 @@ public class CarregaArquivoController {
 
     @FXML
     private void actionConstruirGrafico() {
-        homeApp.toDashBoard(in);
+        homeApp.toDashBoard(in.getPathName());
     }
 
     /**

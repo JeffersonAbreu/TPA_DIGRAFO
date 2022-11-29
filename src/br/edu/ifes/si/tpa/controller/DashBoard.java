@@ -35,4 +35,16 @@ public class DashBoard {
         graficoDesenho = new Grafico(painel, in);
         this.optionsBar.setVisible(true);
     }
+
+    public void actionAlgoritimoMenorQtdArtigosLidos() {
+    }
+
+    public void actionAlgoritimoTodosCaminhos() {
+    }
+
+    public void actionAlgoritimoTopArtigos() {
+    }
+
+    public void actionAlgoritimoTopAutores() {
+    }
 }

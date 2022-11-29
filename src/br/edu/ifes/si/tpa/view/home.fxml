@@ -72,7 +72,7 @@
    <left>
       <StackPane BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="menu" minWidth="-Infinity" onMouseEntered="#acaoExpande" onMouseExited="#acaoRecolhe" prefHeight="623.0" prefWidth="253.0" styleClass="navbar">
+            <VBox fx:id="menu" onMouseEntered="#acaoExpande" onMouseExited="#acaoRecolhe" prefHeight="623.0" prefWidth="253.0" styleClass="navbar">
                <children>
                   <Button fx:id="b0" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionHome" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Home" VBox.vgrow="NEVER">
                      <VBox.margin>
@@ -92,7 +92,7 @@
                         <Font name="Arial Narrow" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="b1" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Menor caminho entre dois artigos" VBox.vgrow="NEVER">
+                  <Button fx:id="b1" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionAlgoritimoMenorQtdArtigosLidos" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Menor caminho entre dois artigos" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets left="5.0" right="5.0" top="10.0" />
                      </VBox.margin>
@@ -110,7 +110,7 @@
                         <Font name="Arial Narrow" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="b2" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Todos os caminhos entre dois artigos" VBox.vgrow="NEVER">
+                  <Button fx:id="b2" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionAlgoritimoTodosCaminhos" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Todos os caminhos entre dois artigos" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets left="5.0" right="5.0" top="10.0" />
                      </VBox.margin>
@@ -128,7 +128,7 @@
                         <Font name="Arial Narrow" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="b3" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Número de citações de cada artigo" VBox.vgrow="NEVER">
+                  <Button fx:id="b3" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionAlgoritimoTopArtigos" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Número de citações de cada artigo" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets left="5.0" right="5.0" top="10.0" />
                      </VBox.margin>
@@ -146,7 +146,7 @@
                         <Font name="Arial Narrow" size="14.0" />
                      </font>
                   </Button>
-                  <Button fx:id="b4" alignment="BASELINE_LEFT" mnemonicParsing="false" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Número de citações de cada autor" VBox.vgrow="NEVER">
+                  <Button fx:id="b4" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionAlgoritimoTopAutores" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Número de citações de cada autor" VBox.vgrow="NEVER">
                      <VBox.margin>
                         <Insets left="5.0" right="5.0" top="10.0" />
                      </VBox.margin>

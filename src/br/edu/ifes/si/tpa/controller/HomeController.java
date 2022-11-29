@@ -1,7 +1,6 @@
 package br.edu.ifes.si.tpa.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -36,6 +35,8 @@ public class HomeController {
 
     // Reference to the main application.
     private Main mainApp;
+    private DashBoard dashBoard;
+
     private List<Button> buttons;
     private String[] nomesMenu = {
             "Home",
@@ -53,8 +54,42 @@ public class HomeController {
 
     @FXML
     void actionHome(MouseEvent event) {
-        if (validacao())
-            loadUI("dashBoard");
+        if (validacao()) {
+            dashBoard = (DashBoard) loadUI("dashBoard");
+            dashBoard.start(new In(path.getText()));
+        }
+    }
+
+    @FXML
+    void actionAlgoritimoMenorQtdArtigosLidos(MouseEvent event) {
+        if (validacao()) {
+            dashBoard.start(new In(path.getText()));
+            dashBoard.actionAlgoritimoMenorQtdArtigosLidos();
+        }
+    }
+
+    @FXML
+    void actionAlgoritimoTodosCaminhos(MouseEvent event) {
+        if (validacao()) {
+            dashBoard.start(new In(path.getText()));
+            dashBoard.actionAlgoritimoTodosCaminhos();
+        }
+    }
+
+    @FXML
+    void actionAlgoritimoTopArtigos(MouseEvent event) {
+        if (validacao()) {
+            dashBoard.start(new In(path.getText()));
+            dashBoard.actionAlgoritimoTopArtigos();
+        }
+    }
+
+    @FXML
+    void actionAlgoritimoTopAutores(MouseEvent event) {
+        if (validacao()) {
+            dashBoard.start(new In(path.getText()));
+            dashBoard.actionAlgoritimoTopAutores();
+        }
     }
 
     @FXML
@@ -110,9 +145,9 @@ public class HomeController {
         return null;
     }
 
-    public void toDashBoard(In in) {
-        path.setText(in.getPathName());
-        ((DashBoard) loadUI("dashBoard")).start(in);
+    public void toDashBoard(String in) {
+        path.setText(in);
+        actionHome(null);
     }
 
     /**

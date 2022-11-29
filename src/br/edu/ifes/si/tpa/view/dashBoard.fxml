@@ -7,9 +7,9 @@
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" styleClass="navbar" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifes.si.tpa.controller.DashBoard">
+<BorderPane styleClass="navbar" xmlns="http://javafx.com/javafx/19" xmlns:fx="http://javafx.com/fxml/1" fx:controller="br.edu.ifes.si.tpa.controller.DashBoard">
    <center>
-      <AnchorPane fx:id="painel" minHeight="540.0" minWidth="680.0" stylesheets="@css/ball.css" BorderPane.alignment="CENTER">
+      <AnchorPane fx:id="painel" minHeight="530.0" minWidth="680.0" stylesheets="@css/ball.css" BorderPane.alignment="CENTER">
          <BorderPane.margin>
             <Insets bottom="5.0" right="7.0" />
          </BorderPane.margin>
