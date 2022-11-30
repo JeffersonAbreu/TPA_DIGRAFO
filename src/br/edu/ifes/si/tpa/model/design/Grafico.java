@@ -2,9 +2,6 @@ package br.edu.ifes.si.tpa.model.design;
 
 import java.io.File;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
 
@@ -16,46 +13,23 @@ import javafx.scene.layout.AnchorPane;
 
 public class Grafico {
     private AnchorPane myPanel;
-
-    private HashMap<Integer, Autor> autores = new HashMap<>();
     private ArrayList<Arrow> listLines = new ArrayList<Arrow>();
     private Ball[] listBalls;
-    private Vertice[] listVertices;
-
+    
     private String pathINI, pathPNG;
+    private Digrafo digrafo;
 
     public Grafico(AnchorPane painel, In in) {
         myPanel = painel;
         construirDesenho(in);
+        loadMyPanel(digrafo.nVertices(), digrafo.nArestas());
     }
 
-    private void construirDesenho(In in) {
+    public void construirDesenho(In in) {
         // guardando o caminho do arquivo
         pathINI = in.getPathName().replace(".txt", ".ini");
         pathPNG = in.getPathName().replace(".txt", "_print.png");
-
-        int nVertices = Integer.parseInt(in.readLine());
-        int nArestas = Integer.parseInt(in.readLine());
-        listVertices = new Vertice[nVertices];
-
-        // lendo vertices e arestas do arquivo
-        for (int i = 0; i < nVertices; i++) {
-            StringTokenizer st = new StringTokenizer(in.readLine(), " ");
-            int vertice = Integer.parseInt(st.nextToken().trim()); // verticeInicial
-            int autor = Integer.parseInt(st.nextToken().trim()); // verticeFinal
-            listVertices[i] = new Vertice(vertice, getAutor(autor));
-        }
-
-        // System.out.println("\nArestas: " + arestas);
-        for (int i = 0; i < nArestas; i++) {
-            StringTokenizer st = new StringTokenizer(in.readLine(), " ");
-            int orig = Integer.parseInt(st.nextToken().trim()); // arestaInicial
-            int dest = Integer.parseInt(st.nextToken().trim()); // arestaFinal
-            listVertices[orig].addAdj(new Aresta(orig, dest));
-        }
-
-        in.close();
-        loadMyPanel(nVertices, nArestas);
+        digrafo = new Digrafo(in);
     }
 
     // =================================================================================
@@ -74,7 +48,7 @@ public class Grafico {
     }
 
     private void loadLines() {
-        for (Vertice v : listVertices) {
+        for (Vertice v : digrafo.getListVertices()) {
             for (Aresta a : v.getAllAdj()) {
                 Ball orin = listBalls[a.getV1()];
                 Ball dest = listBalls[a.getV2()];
@@ -122,22 +96,10 @@ public class Grafico {
 
     private void createBall(int id, int posX, int posY) {
         // Criando
-        Vertice vertice = listVertices[id];
+        Vertice vertice = digrafo.getVertice(id);
         Ball ball = new Ball(posX, posY, vertice.getID());
         ball.getStyleClass().add("cor_" + vertice.getAutor().getID());
         listBalls[id] = ball;
-    }
-
-    // metodos publicos
-    public Autor getAutor(int ID) {
-        if (!autores.containsKey((Integer) ID)) {
-            autores.put((Integer) ID, new Autor(ID));
-        }
-        return autores.get((Integer) ID);
-    }
-
-    public List<Vertice> getVertices() {
-        return Arrays.asList(listVertices);
     }
 
     // =============== Acoes da tela principal ====================================

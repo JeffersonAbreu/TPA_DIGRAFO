@@ -63,7 +63,6 @@ public class HomeController {
     @FXML
     void actionAlgoritimoMenorQtdArtigosLidos(MouseEvent event) {
         if (validacao()) {
-            dashBoard.start(new In(path.getText()));
             dashBoard.actionAlgoritimoMenorQtdArtigosLidos();
         }
     }
@@ -71,7 +70,6 @@ public class HomeController {
     @FXML
     void actionAlgoritimoTodosCaminhos(MouseEvent event) {
         if (validacao()) {
-            dashBoard.start(new In(path.getText()));
             dashBoard.actionAlgoritimoTodosCaminhos();
         }
     }
@@ -79,7 +77,6 @@ public class HomeController {
     @FXML
     void actionAlgoritimoTopArtigos(MouseEvent event) {
         if (validacao()) {
-            dashBoard.start(new In(path.getText()));
             dashBoard.actionAlgoritimoTopArtigos();
         }
     }
@@ -87,7 +84,6 @@ public class HomeController {
     @FXML
     void actionAlgoritimoTopAutores(MouseEvent event) {
         if (validacao()) {
-            dashBoard.start(new In(path.getText()));
             dashBoard.actionAlgoritimoTopAutores();
         }
     }
