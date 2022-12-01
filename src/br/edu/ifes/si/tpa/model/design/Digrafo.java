@@ -24,6 +24,7 @@ public class Digrafo {
             int vertice = Integer.parseInt(st.nextToken().trim()); // verticeInicial
             int autor = Integer.parseInt(st.nextToken().trim()); // verticeFinal
             listVertices[i] = new Vertice(vertice, getAutor(autor));
+            autores.get(autor).addObra(vertice);
         }
 
         // System.out.println("\nArestas: " + arestas);

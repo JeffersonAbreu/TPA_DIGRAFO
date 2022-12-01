@@ -2,6 +2,7 @@ package br.edu.ifes.si.tpa.model.design;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
 
@@ -15,7 +16,7 @@ public class Grafico {
     private AnchorPane myPanel;
     private ArrayList<Arrow> listLines = new ArrayList<Arrow>();
     private Ball[] listBalls;
-    
+
     private String pathINI, pathPNG;
     private Digrafo digrafo;
 
@@ -25,14 +26,16 @@ public class Grafico {
         loadMyPanel(digrafo.nVertices(), digrafo.nArestas());
     }
 
+    public Digrafo getDigrafo() {
+        return digrafo;
+    }
+
     public void construirDesenho(In in) {
         // guardando o caminho do arquivo
         pathINI = in.getPathName().replace(".txt", ".ini");
         pathPNG = in.getPathName().replace(".txt", "_print.png");
         digrafo = new Digrafo(in);
     }
-
-    // =================================================================================
 
     private void loadMyPanel(int nV, int nA) {
         loadBalls(nV);
@@ -119,5 +122,11 @@ public class Grafico {
         }
         out.close();
         System.out.println();
+    }
+
+    public void descolorir() {
+    }
+
+    public void colorir(int origem, int destino, List<Integer> caminhos) {
     }
 }

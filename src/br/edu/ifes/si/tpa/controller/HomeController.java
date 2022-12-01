@@ -6,12 +6,18 @@ import java.util.List;
 
 import br.edu.ifes.si.tpa.Main;
 import br.edu.ifes.si.tpa.model.design.In;
+import br.edu.ifes.si.tpa.utils.MenorCaminho;
+import br.edu.ifes.si.tpa.utils.TodosOsCaminhos;
+import br.edu.ifes.si.tpa.utils.TopAutores;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.scene.text.Font;
@@ -22,13 +28,22 @@ public class HomeController {
     boolean closeAtivo = false;
 
     @FXML
-    Label path;
+    private Label path, resultTitle, resultArea, lErro, lErro2;
+
+    @FXML
+    private Pane paneBusca, paneBusca2;
+
+    @FXML
+    private TextField tfDe, tfPara, tfDe2, tfPara2;
 
     @FXML
     private Button close, b0, b1, b2, b3, b4, b5;
 
     @FXML
     private BorderPane borderPane;
+
+    @FXML
+    private AnchorPane paneResult;
 
     @FXML
     private VBox menu;
@@ -61,46 +76,142 @@ public class HomeController {
     }
 
     @FXML
-    void actionAlgoritimoMenorQtdArtigosLidos(MouseEvent event) {
+    void actionAbrirPanelBusca(MouseEvent event) {
         if (validacao()) {
-            dashBoard.actionAlgoritimoMenorQtdArtigosLidos();
+            dashBoard.descolorir();
+            paneBusca2.setPrefHeight(0);
+            paneBusca2.setVisible(false);
+            paneBusca.setPrefHeight(125);
+            paneBusca.setVisible(true);
+            lErro.setText("");
+            tfDe.setText("");
+            tfPara.setText("");
+        }
+    }
+    
+    @FXML
+    void actionAbrirPanelBusca2(MouseEvent event) {
+        if (validacao()) {
+            dashBoard.descolorir();
+            paneBusca.setPrefHeight(0);
+            paneBusca.setVisible(false);
+            paneBusca2.setPrefHeight(125);
+            paneBusca2.setVisible(true);
+            lErro2.setText("");
+            tfDe2.setText("");
+            tfPara2.setText("");
         }
     }
 
     @FXML
-    void actionAlgoritimoTodosCaminhos(MouseEvent event) {
-        if (validacao()) {
-            dashBoard.actionAlgoritimoTodosCaminhos();
+    void actionMenorCaminho(MouseEvent event) {
+        String text = validacaoPanel(tfDe, tfPara);
+        if (text.isBlank()) {
+            lErro.setText("");
+            int origem = Integer.valueOf(tfDe.getText());
+            int destino = Integer.valueOf(tfPara.getText());
+            String title = "Menor Caminho";
+            String retorno = MenorCaminho.run(dashBoard.getDigrafo(), origem, destino);
+            if (retorno.isBlank()) {
+                lErro.setText("Nenhum caminho encontrado!");
+            } else {
+                acaoRecolhe();
+                paneResultExpande(title, retorno);
+                // TRANSFORMAR O retorno EM UMA LIST
+                dashBoard.colorir(origem, destino, null);
+            }
+        } else {
+            lErro.setText(text);
+        }
+    }
+
+    private String validacaoPanel(TextField de, TextField para) {
+        String err = "";
+        int id;
+        try {
+            id = Integer.parseInt(de.getText());
+            dashBoard.getDigrafo().getVertice(id);
+        } catch (Exception e) {
+            err = "Origem: inválido!";
+            return err;
+        }
+        try {
+            id = Integer.parseInt(para.getText());
+            dashBoard.getDigrafo().getVertice(id);
+        } catch (Exception e) {
+            err = "Destino: inválido!";
+            return err;
+        }
+        return err;
+    }
+
+    @FXML
+    void actionTodosOsCaminhos(MouseEvent event) {
+        String text = validacaoPanel(tfDe2, tfPara2);
+        if (text.isBlank()) {
+            lErro2.setText("");
+            int origem = Integer.valueOf(tfDe2.getText());
+            int destino = Integer.valueOf(tfPara2.getText());
+            String title = "Todos os Caminhos";
+            String retorno = TodosOsCaminhos.run(dashBoard.getDigrafo(), origem, destino);
+            if (retorno.isBlank()) {
+                lErro2.setText("Nenhum caminho encontrado!");
+            } else {
+                acaoRecolhe();
+                paneResultExpande(title, retorno);
+                // TRANSFORMAR O retorno EM UMA LIST
+                dashBoard.colorir(origem, destino, null);
+            }
+        } else {
+            lErro2.setText(text);
         }
     }
 
     @FXML
-    void actionAlgoritimoTopArtigos(MouseEvent event) {
+    void actionTopArtigos(MouseEvent event) {
         if (validacao()) {
-            dashBoard.actionAlgoritimoTopArtigos();
+            dashBoard.descolorir();
+            String title = "Top Artigos";
+            String retorno = TopAutores.run(dashBoard.getDigrafo());
+            paneResultExpande(title, retorno);
         }
     }
 
     @FXML
-    void actionAlgoritimoTopAutores(MouseEvent event) {
+    void actionTopAutores(MouseEvent event) {
         if (validacao()) {
-            dashBoard.actionAlgoritimoTopAutores();
+            dashBoard.descolorir();
+            String title = "Top Autores";
+            String retorno = TopAutores.run(dashBoard.getDigrafo());
+            paneResultExpande(title, retorno);
         }
     }
 
+    private void paneResultExpande(String title, String retorno) {
+        acaoRecolhe();
+        resultTitle.setText(title);
+        resultArea.setText(retorno);
+        paneResult.setPrefWidth(200);
+    }
+
     @FXML
-    void acaoExpande(MouseEvent event) {
+    void acaoExpande() {
         menu.setPrefWidth(253);
         menu.setMinWidth(253);
         for (int i = 0; i < buttons.size(); i++) {
             buttons.get(i).setText(nomesMenu[i]);
         }
+        paneResultRecolhe();
     }
 
     @FXML
-    void acaoRecolhe(MouseEvent event) {
+    void acaoRecolhe() {
         menu.setPrefWidth(52);
         menu.setMinWidth(52);
+        paneBusca.setPrefHeight(0);
+        paneBusca.setVisible(false);
+        paneBusca2.setPrefHeight(0);
+        paneBusca2.setVisible(false);
         for (int i = 0; i < buttons.size(); i++) {
             buttons.get(i).setText("");
         }
@@ -117,13 +228,16 @@ public class HomeController {
         closeAtivo = !closeAtivo;
     }
 
-    /**
-     * 
-     */
     @FXML
     void initialize() {
         path.setText("");
         buttons = Arrays.asList(b0, b1, b2, b3, b4, b5);
+        acaoRecolhe();
+        paneResultRecolhe();
+    }
+
+    private void paneResultRecolhe() {
+        paneResult.setPrefWidth(0);
     }
 
     /**
@@ -146,11 +260,6 @@ public class HomeController {
         actionHome(null);
     }
 
-    /**
-     * É chamado pela aplicação principal para referenciar a si mesma.
-     * 
-     * @param mainApp
-     */
     public void setMainApp(Main mainApp) {
         this.mainApp = mainApp;
     }

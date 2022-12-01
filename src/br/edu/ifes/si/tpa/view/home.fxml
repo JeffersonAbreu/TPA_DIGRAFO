@@ -3,13 +3,14 @@
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.effect.ColorAdjust?>
 <?import javafx.scene.image.Image?>
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.BorderPane?>
 <?import javafx.scene.layout.HBox?>
-<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.paint.Color?>
 <?import javafx.scene.paint.LinearGradient?>
@@ -70,121 +71,152 @@
       <Label fx:id="path" prefHeight="17.0" prefWidth="769.0" text="Label" BorderPane.alignment="CENTER" />
    </bottom>
    <left>
-      <StackPane BorderPane.alignment="CENTER">
+      <VBox fx:id="menu" onMouseEntered="#acaoExpande" onMouseExited="#acaoRecolhe" prefHeight="623.0" prefWidth="253.0" styleClass="navbar" BorderPane.alignment="CENTER">
          <children>
-            <VBox fx:id="menu" onMouseEntered="#acaoExpande" onMouseExited="#acaoRecolhe" prefHeight="623.0" prefWidth="253.0" styleClass="navbar">
+            <Button fx:id="b0" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionHome" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Home" VBox.vgrow="NEVER">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="10.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/home_FILL0_wght300_GRAD0_opsz40.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" contrast="-1.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial Narrow" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="b1" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionAbrirPanelBusca" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Menor caminho entre dois artigos" VBox.vgrow="NEVER">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="10.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/pin_drop_FILL0_wght300_GRAD0_opsz40.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" contrast="-1.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial Narrow" size="14.0" />
+               </font>
+            </Button>
+            <Pane fx:id="paneBusca" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="125.0">
                <children>
-                  <Button fx:id="b0" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionHome" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Home" VBox.vgrow="NEVER">
-                     <VBox.margin>
-                        <Insets left="5.0" right="5.0" top="10.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/home_FILL0_wght300_GRAD0_opsz40.png" />
-                           </image>
-                           <effect>
-                              <ColorAdjust brightness="1.0" contrast="-1.0" />
-                           </effect>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Arial Narrow" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="b1" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionAlgoritimoMenorQtdArtigosLidos" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Menor caminho entre dois artigos" VBox.vgrow="NEVER">
-                     <VBox.margin>
-                        <Insets left="5.0" right="5.0" top="10.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/pin_drop_FILL0_wght300_GRAD0_opsz40.png" />
-                           </image>
-                           <effect>
-                              <ColorAdjust brightness="1.0" contrast="-1.0" />
-                           </effect>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Arial Narrow" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="b2" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionAlgoritimoTodosCaminhos" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Todos os caminhos entre dois artigos" VBox.vgrow="NEVER">
-                     <VBox.margin>
-                        <Insets left="5.0" right="5.0" top="10.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/trending_up_FILL0_wght300_GRAD0_opsz40.png" />
-                           </image>
-                           <effect>
-                              <ColorAdjust brightness="1.0" contrast="-1.0" />
-                           </effect>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Arial Narrow" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="b3" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionAlgoritimoTopArtigos" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Número de citações de cada artigo" VBox.vgrow="NEVER">
-                     <VBox.margin>
-                        <Insets left="5.0" right="5.0" top="10.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/description_FILL0_wght300_GRAD0_opsz40.png" />
-                           </image>
-                           <effect>
-                              <ColorAdjust brightness="1.0" contrast="-1.0" />
-                           </effect>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Arial Narrow" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="b4" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionAlgoritimoTopAutores" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Número de citações de cada autor" VBox.vgrow="NEVER">
-                     <VBox.margin>
-                        <Insets left="5.0" right="5.0" top="10.0" />
-                     </VBox.margin>
-                     <graphic>
-                        <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/person_FILL0_wght300_GRAD0_opsz40.png" />
-                           </image>
-                           <effect>
-                              <ColorAdjust brightness="1.0" contrast="-1.0" />
-                           </effect>
-                        </ImageView>
-                     </graphic>
-                     <font>
-                        <Font name="Arial Narrow" size="14.0" />
-                     </font>
-                  </Button>
-                  <Button fx:id="b5" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionCarregaArquivo" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Carregar Arquivo..." VBox.vgrow="NEVER">
-                     <graphic>
-                        <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
-                           <image>
-                              <Image url="@img/search_FILL0_wght300_GRAD0_opsz40.png" />
-                           </image>
-                           <effect>
-                              <ColorAdjust brightness="1.0" contrast="-1.0" />
-                           </effect>
-                        </ImageView>
-                     </graphic>
-                     <VBox.margin>
-                        <Insets left="5.0" right="5.0" top="10.0" />
-                     </VBox.margin>
-                     <font>
-                        <Font name="Arial Narrow" size="14.0" />
-                     </font>
-                  </Button>
+                  <Label layoutX="160.0" layoutY="14.0" text="Destino" />
+                  <Label layoutX="40.0" layoutY="14.0" text="Origem" />
+                  <Button layoutX="92.0" layoutY="72.0" mnemonicParsing="false" onMouseClicked="#actionMenorCaminho" prefHeight="25.0" prefWidth="121.0" styleClass="nav" text="Buscar" />
+                  <TextField fx:id="tfDe" layoutX="40.0" layoutY="37.0" prefWidth="45.0" />
+                  <TextField fx:id="tfPara" layoutX="157.0" layoutY="37.0" prefWidth="45.0" />
+                  <Label fx:id="lErro" layoutX="14.0" layoutY="103.0" prefHeight="17.0" prefWidth="229.0" textFill="RED" />
                </children>
-            </VBox>
+            </Pane>
+            <Button fx:id="b2" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionAbrirPanelBusca2" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Todos os caminhos entre dois artigos" VBox.vgrow="NEVER">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="10.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/trending_up_FILL0_wght300_GRAD0_opsz40.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" contrast="-1.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial Narrow" size="14.0" />
+               </font>
+            </Button>
+            <Pane fx:id="paneBusca2" layoutX="10.0" layoutY="97.0" maxHeight="-Infinity" minHeight="-Infinity" prefHeight="125.0">
+               <children>
+                  <Label layoutX="160.0" layoutY="14.0" text="Destino" />
+                  <Label layoutX="40.0" layoutY="14.0" text="Origem" />
+                  <Button layoutX="92.0" layoutY="72.0" mnemonicParsing="false" onMouseClicked="#actionTodosOsCaminhos" prefHeight="25.0" prefWidth="121.0" styleClass="nav" text="Buscar" />
+                  <TextField fx:id="tfDe2" layoutX="40.0" layoutY="34.0" prefWidth="45.0" />
+                  <TextField fx:id="tfPara2" layoutX="157.0" layoutY="34.0" prefWidth="45.0" />
+                  <Label fx:id="lErro2" layoutX="7.0" layoutY="103.0" prefHeight="17.0" prefWidth="234.0" textFill="RED" />
+               </children>
+            </Pane>
+            <Button fx:id="b3" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionTopArtigos" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Número de citações de cada artigo" VBox.vgrow="NEVER">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="10.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/description_FILL0_wght300_GRAD0_opsz40.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" contrast="-1.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial Narrow" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="b4" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionTopAutores" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Número de citações de cada autor" VBox.vgrow="NEVER">
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="10.0" />
+               </VBox.margin>
+               <graphic>
+                  <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/person_FILL0_wght300_GRAD0_opsz40.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" contrast="-1.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+               <font>
+                  <Font name="Arial Narrow" size="14.0" />
+               </font>
+            </Button>
+            <Button fx:id="b5" alignment="BASELINE_LEFT" mnemonicParsing="false" onMouseClicked="#actionCarregaArquivo" prefHeight="25.0" prefWidth="242.0" styleClass="nav" text="Carregar Arquivo..." VBox.vgrow="NEVER">
+               <graphic>
+                  <ImageView fitWidth="24.0" nodeOrientation="INHERIT" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@img/search_FILL0_wght300_GRAD0_opsz40.png" />
+                     </image>
+                     <effect>
+                        <ColorAdjust brightness="1.0" contrast="-1.0" />
+                     </effect>
+                  </ImageView>
+               </graphic>
+               <VBox.margin>
+                  <Insets left="5.0" right="5.0" top="10.0" />
+               </VBox.margin>
+               <font>
+                  <Font name="Arial Narrow" size="14.0" />
+               </font>
+            </Button>
          </children>
-      </StackPane>
+      </VBox>
    </left>
+   <right>
+      <AnchorPane fx:id="paneResult" maxWidth="-Infinity" minWidth="-Infinity" prefWidth="200.0" style="-fx-background-color: #ffffff; -fx-border-color: #dedede;" BorderPane.alignment="CENTER">
+         <children>
+            <Label fx:id="resultTitle" alignment="CENTER" layoutY="1.0" prefHeight="30.0" prefWidth="199.0" style="-fx-background-color: #dedede;" text="title">
+               <font>
+                  <Font name="Arial Bold Italic" size="14.0" />
+               </font>
+            </Label>
+            <Label fx:id="resultArea" alignment="TOP_LEFT" layoutX="5.0" layoutY="35.0" prefHeight="530.0" prefWidth="193.0" text="result">
+               <font>
+                  <Font name="Arial" size="16.0" />
+               </font></Label>
+         </children>
+      </AnchorPane>
+   </right>
 </BorderPane>

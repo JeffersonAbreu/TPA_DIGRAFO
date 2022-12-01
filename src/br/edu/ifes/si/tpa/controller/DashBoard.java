@@ -1,5 +1,8 @@
 package br.edu.ifes.si.tpa.controller;
 
+import java.util.List;
+
+import br.edu.ifes.si.tpa.model.design.Digrafo;
 import br.edu.ifes.si.tpa.model.design.Grafico;
 import br.edu.ifes.si.tpa.model.design.In;
 import javafx.event.ActionEvent;
@@ -36,15 +39,15 @@ public class DashBoard {
         this.optionsBar.setVisible(true);
     }
 
-    public void actionAlgoritimoMenorQtdArtigosLidos() {
+    public Digrafo getDigrafo() {
+        return graficoDesenho.getDigrafo();
     }
 
-    public void actionAlgoritimoTodosCaminhos() {
+    public void colorir(int origem, int destino, List<Integer> caminhos) {
+        graficoDesenho.colorir(origem, destino, caminhos);
     }
 
-    public void actionAlgoritimoTopArtigos() {
-    }
-
-    public void actionAlgoritimoTopAutores() {
+    public void descolorir() {
+        graficoDesenho.descolorir();
     }
 }
