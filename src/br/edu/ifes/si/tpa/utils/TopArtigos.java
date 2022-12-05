@@ -1,15 +1,11 @@
 package br.edu.ifes.si.tpa.utils;
 
 import java.io.File;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
 
-import br.edu.ifes.si.tpa.model.design.Autor;
+import br.edu.ifes.si.tpa.model.design.Aresta;
 import br.edu.ifes.si.tpa.model.design.Digrafo;
 import br.edu.ifes.si.tpa.model.design.In;
+import br.edu.ifes.si.tpa.model.design.Vertice;
 
 public class TopArtigos {
      public static void main(String[] args) {
@@ -21,17 +17,16 @@ public class TopArtigos {
 
      public static String run(Digrafo digrafo) {
           String retorno = "";
-          // Getting Collection of values from HashMap
-          Collection<Autor> values = digrafo.getAutores().values();
+          int[] citacoes_cada_artigo = new int[digrafo.nVertices()];
+          for (Vertice artigo : digrafo.getListVertices()) {
+               for ( Aresta aresta : artigo.getAllAdj()) {
+                    int referencia = aresta.getV2();
+                    citacoes_cada_artigo[referencia]++;
+               }
+          } 
 
-          // Creating an ArrayList of values
-          List<Autor> autores = new ArrayList<>(values);
-
-          autores.sort(Comparator.comparing(Autor::getTotalObras)); // ordena
-          Collections.reverse(autores); // inverte a ordem
-
-          for (Autor autor : autores) {
-               retorno += autor.getID() + ": " + autor.getTotalObras() + "\n";
+          for (Vertice artigo : digrafo.getListVertices()) {
+               retorno += artigo.getID() + ": " + citacoes_cada_artigo[artigo.getID()] + "\n";
           }
           return retorno;
      }

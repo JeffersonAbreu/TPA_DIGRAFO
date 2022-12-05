@@ -11,6 +11,7 @@ import javax.imageio.ImageIO;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.paint.Color;
 
 public class Grafico {
     private AnchorPane myPanel;
@@ -125,8 +126,24 @@ public class Grafico {
     }
 
     public void descolorir() {
+        for (Ball ball : listBalls) {
+            ball.setSelected(false);
+        }
+        for (Arrow arrow : listLines) {
+            arrow.apaga();
+        }
     }
 
     public void colorir(int origem, int destino, List<Integer> caminhos) {
+        // origem
+        listBalls[origem].setStroke(Color.GOLD);
+        listBalls[origem].setStrokeWidth(3);
+
+        listBalls[destino].setStroke(Color.GOLD);
+        listBalls[destino].setStrokeWidth(3);
+
+        for (Arrow arrow : listLines) {
+            arrow.acende();
+        }
     }
 }

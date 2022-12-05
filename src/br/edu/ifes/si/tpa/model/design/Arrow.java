@@ -25,6 +25,7 @@ public class Arrow extends Group {
     private Polygon triangle;
 
     private BooleanProperty selected = new SimpleBooleanProperty(false);
+
     // Define a variable property (bind)
     private IntegerProperty origemX;
     private IntegerProperty origemY;
@@ -69,6 +70,10 @@ public class Arrow extends Group {
 
     public Arrow(Ball origem, Ball destino) {
         this(origem, destino, 0);
+    }
+
+    public void setSelected(BooleanProperty selected) {
+        this.selected = selected;
     }
 
     public void mostraPeso() {
@@ -197,6 +202,14 @@ public class Arrow extends Group {
         });
 
         atualizaPontaDaFlecha();
+    }
+
+    public void acende() {
+        selected = new SimpleBooleanProperty(true);
+    }
+
+    public void apaga() {
+        selected = new SimpleBooleanProperty(false);
     }
 
 }

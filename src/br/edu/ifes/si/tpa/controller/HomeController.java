@@ -8,6 +8,7 @@ import br.edu.ifes.si.tpa.Main;
 import br.edu.ifes.si.tpa.model.design.In;
 import br.edu.ifes.si.tpa.utils.MenorCaminho;
 import br.edu.ifes.si.tpa.utils.TodosOsCaminhos;
+import br.edu.ifes.si.tpa.utils.TopArtigos;
 import br.edu.ifes.si.tpa.utils.TopAutores;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
@@ -57,8 +58,8 @@ public class HomeController {
             "Home",
             "Menor caminho entre dois artigos",
             "Todos os caminhos entre dois artigos",
-            "Número de citações de cada artigo",
-            "Número de citações de cada autor",
+            "Top Artigos",
+            "Top Autor",
             "Carregar Arquivo..."
     };
 
@@ -88,7 +89,7 @@ public class HomeController {
             tfPara.setText("");
         }
     }
-    
+
     @FXML
     void actionAbrirPanelBusca2(MouseEvent event) {
         if (validacao()) {
@@ -111,14 +112,19 @@ public class HomeController {
             int origem = Integer.valueOf(tfDe.getText());
             int destino = Integer.valueOf(tfPara.getText());
             String title = "Menor Caminho";
-            String retorno = MenorCaminho.run(dashBoard.getDigrafo(), origem, destino);
-            if (retorno.isBlank()) {
+            List<Integer> caminho = MenorCaminho.run(dashBoard.getDigrafo(), origem, destino);
+            if (caminho.isEmpty()) {
                 lErro.setText("Nenhum caminho encontrado!");
             } else {
                 acaoRecolhe();
+                String retorno = "";
+                retorno += String.format("%2d para %2d:  \n", origem ,destino);
+                retorno += MenorCaminho.caminhoToString(caminho);
+                
+                
                 paneResultExpande(title, retorno);
                 // TRANSFORMAR O retorno EM UMA LIST
-                dashBoard.colorir(origem, destino, null);
+                dashBoard.colorir(origem, destino, caminho);
             }
         } else {
             lErro.setText(text);
@@ -153,12 +159,17 @@ public class HomeController {
             int origem = Integer.valueOf(tfDe2.getText());
             int destino = Integer.valueOf(tfPara2.getText());
             String title = "Todos os Caminhos";
-            String retorno = TodosOsCaminhos.run(dashBoard.getDigrafo(), origem, destino);
-            if (retorno.isBlank()) {
+            List<List<Integer>> caminhos = TodosOsCaminhos.run(dashBoard.getDigrafo(), origem, destino);
+            if (caminhos.isEmpty()) {
                 lErro2.setText("Nenhum caminho encontrado!");
             } else {
                 acaoRecolhe();
-                paneResultExpande(title, retorno);
+                String resultado = "";
+                resultado += String.format("%2d para %2d:  \n", origem ,destino);
+                for (List<Integer> caminho : caminhos) {
+                    resultado += TodosOsCaminhos.caminhoToString(caminho) + "\n";
+                }
+                paneResultExpande(title, resultado);
                 // TRANSFORMAR O retorno EM UMA LIST
                 dashBoard.colorir(origem, destino, null);
             }
@@ -172,7 +183,7 @@ public class HomeController {
         if (validacao()) {
             dashBoard.descolorir();
             String title = "Top Artigos";
-            String retorno = TopAutores.run(dashBoard.getDigrafo());
+            String retorno = TopArtigos.run(dashBoard.getDigrafo());
             paneResultExpande(title, retorno);
         }
     }
