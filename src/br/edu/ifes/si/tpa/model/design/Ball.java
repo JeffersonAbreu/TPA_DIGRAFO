@@ -15,15 +15,14 @@ import javafx.scene.text.TextFlow;
 public class Ball extends Circle {
    private TextFlow token;
 
-   double origenSceneX, origenSceneY;
-   double origenTranslateX, origenTranslateY;
+   private double origenSceneX, origenSceneY;
+   private double origenTranslateX, origenTranslateY;
 
    private final int ID;
 
    // Define a variable to store the property
    private IntegerProperty x;
    private IntegerProperty y;
-   private BooleanProperty selected = new SimpleBooleanProperty(false);
 
    // Define a getter for the property's value
    public final int getX() {
@@ -106,19 +105,6 @@ public class Ball extends Circle {
             setY(pY);
          }
       });
-      token.setOnMouseClicked((t) -> {
-         selected.set(!selected.get());
-      });
-
-      selected.addListener((observable, oldvalue, newvalue) -> {
-         if (selected.get()) {
-            this.setStroke(Color.LIMEGREEN);
-            this.setStrokeWidth(3);
-         } else {
-            this.setStroke(Color.TRANSPARENT);
-            this.setStrokeWidth(0);
-         }
-      });
    }
 
    private void criaTexto() {
@@ -142,11 +128,13 @@ public class Ball extends Circle {
       this.token.toFront();
    }
 
-   public void setSelected(boolean value) {
-      selected.set(value);
+   public void apaga() {
+      this.setStroke(Color.TRANSPARENT);
+      this.setStrokeWidth(0);
    }
 
-   public BooleanProperty selectedProperty() {
-      return selected;
+   public void acende() {
+      this.setStroke(Color.RED);
+      this.setStrokeWidth(3);
    }
 }

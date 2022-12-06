@@ -1,8 +1,6 @@
 package br.edu.ifes.si.tpa.model.design;
 
-import javafx.beans.property.BooleanProperty;
 import javafx.beans.property.IntegerProperty;
-import javafx.beans.property.SimpleBooleanProperty;
 import javafx.beans.property.SimpleIntegerProperty;
 import javafx.scene.Group;
 import javafx.scene.paint.Color;
@@ -24,8 +22,6 @@ public class Arrow extends Group {
     private Line linha;
     private Polygon triangle;
 
-    private BooleanProperty selected = new SimpleBooleanProperty(false);
-
     // Define a variable property (bind)
     private IntegerProperty origemX;
     private IntegerProperty origemY;
@@ -45,35 +41,12 @@ public class Arrow extends Group {
         if (peso > 0)
             mostraPeso();
 
-        orin.selectedProperty().addListener((observable, oldvalue, newvalue) -> {
-            selected.set(!selected.get());
-        });
-
-        selected.addListener((observable, oldvalue, newvalue) -> {
-            if (selected.get()) {
-                linha.setStroke(Color.RED);
-                linha.setStrokeWidth(3);
-                linha.setOpacity(1);
-                triangle.setFill(Color.RED);
-                linha.toFront();
-                triangle.toFront();
-            } else {
-                linha.setStroke(color);
-                linha.setStrokeWidth(largura);
-                linha.setOpacity(0.5);
-                triangle.setFill(color);
-            }
-        });
         linha.setOpacity(0.5);
         triangle.toFront();
     }
 
     public Arrow(Ball origem, Ball destino) {
         this(origem, destino, 0);
-    }
-
-    public void setSelected(BooleanProperty selected) {
-        this.selected = selected;
     }
 
     public void mostraPeso() {
@@ -205,11 +178,22 @@ public class Arrow extends Group {
     }
 
     public void acende() {
-        selected = new SimpleBooleanProperty(true);
+        linha.setStroke(Color.RED);
+        linha.setStrokeWidth(3);
+        linha.setOpacity(1);
+        triangle.setFill(Color.RED);
+        linha.toFront();
+        triangle.toFront();
     }
 
     public void apaga() {
-        selected = new SimpleBooleanProperty(false);
+        linha.setStroke(color);
+        linha.setStrokeWidth(largura);
+        linha.setOpacity(0.5);
+        triangle.setFill(color);
     }
 
+    public boolean isConection(int origem, int destino) {
+        return orin.getID() == origem && dest.getID() == destino;
+    }
 }

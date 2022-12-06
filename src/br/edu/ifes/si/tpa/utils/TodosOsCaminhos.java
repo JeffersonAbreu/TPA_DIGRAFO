@@ -8,7 +8,6 @@ import br.edu.ifes.si.tpa.model.design.In;
 import br.edu.ifes.si.tpa.model.domain.AlgoritmoDFSDigrafo;
 
 public class TodosOsCaminhos {
-
     public static void main(String[] args) {
         In in = new In(new File("_dados/Digrafo1.txt").getAbsolutePath());
         Digrafo digrafo = new Digrafo(in);
@@ -24,9 +23,8 @@ public class TodosOsCaminhos {
 
     public static String caminhoToString(List<Integer> caminho) {
         String resultado = String.valueOf(caminho.get(0));
-        caminho.remove(0);
-        for (Integer i : caminho) {
-            resultado += " => " + String.format("%2d", i);
+        for (int i = 1; i < caminho.size(); i++) {
+            resultado += " => " + String.format("%2d", caminho.get(i));
         }
         return resultado;
     }

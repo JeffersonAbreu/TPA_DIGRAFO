@@ -10,13 +10,15 @@ import br.edu.ifes.si.tpa.model.design.Digrafo;
 public class AlgoritmoBFSDigrafo {
 
     private static final int INFINITY = Integer.MAX_VALUE;
-    private boolean[] marcado;    // marcado[v1] = existe um caminho do vértice origem vo->v1?
-    private int[] arestaPara;     // arestaPara[v1] = última aresta no menor caminho vértice origem vo->v1
-    private int[] distanciaPara;  // distanciaPara[v1] = tamanho do menor caminho vértice origem vo->v1
+    private boolean[] marcado; // marcado[v1] = existe um caminho do vértice origem vo->v1?
+    private int[] arestaPara; // arestaPara[v1] = última aresta no menor caminho vértice origem vo->v1
+    private int[] distanciaPara; // distanciaPara[v1] = tamanho do menor caminho vértice origem vo->v1
 
     /**
-     * Verifica o menor caminho de um vértice origem vo e todos os demais vértices do dígrafo
-     * @param G o dígrafo
+     * Verifica o menor caminho de um vértice origem vo e todos os demais vértices
+     * do dígrafo
+     * 
+     * @param G  o dígrafo
      * @param vo o vértice origem
      */
     public AlgoritmoBFSDigrafo(Digrafo G, int vo) {
@@ -31,7 +33,8 @@ public class AlgoritmoBFSDigrafo {
 
     /**
      * Método algoritmoBFS para um vértice origem
-     * @param G o dígrafo
+     * 
+     * @param G  o dígrafo
      * @param vo o vértice origem
      */
     private void bfs(Digrafo G, int vo) {
@@ -55,8 +58,10 @@ public class AlgoritmoBFSDigrafo {
 
     /**
      * Existe um caminho direcionado do vértice atual para o vértice v
+     * 
      * @param v o vértice
-     * @return verdadeiro se existir um caminho direcionado, ou falso, caso contrário
+     * @return verdadeiro se existir um caminho direcionado, ou falso, caso
+     *         contrário
      */
     public boolean temCaminhoPara(int v) {
         return marcado[v];
@@ -64,6 +69,7 @@ public class AlgoritmoBFSDigrafo {
 
     /**
      * Retorna o número de arestas no menor caminho do vértice origem v
+     * 
      * @param v o vértice
      * @return o número de arestas no menor caminho
      */
@@ -72,7 +78,9 @@ public class AlgoritmoBFSDigrafo {
     }
 
     /**
-     * Retorna um caminho do vértice origem para o vértice v ou null se não existir caminho
+     * Retorna um caminho do vértice origem para o vértice v ou null se não existir
+     * caminho
+     * 
      * @param v o vértice
      * @return a sequência de vértices no menor caminho, como iterable
      */
@@ -89,10 +97,12 @@ public class AlgoritmoBFSDigrafo {
         return caminho;
     }
 
-    public List<Integer> getCaminhoPara(int v){
-        List<Integer> lista = new ArrayList();
-        for (Integer i : caminhoPara(v)) {
-            lista.add(i);
+    public List<Integer> getCaminhoPara(int v) {
+        List<Integer> lista = new ArrayList<>();
+        if (caminhoPara(v) != null) {
+            for (Integer i : caminhoPara(v)) {
+                lista.add(i);
+            }
         }
         return lista;
     }

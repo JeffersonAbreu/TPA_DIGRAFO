@@ -43,8 +43,8 @@ public class DashBoard {
         return graficoDesenho.getDigrafo();
     }
 
-    public void colorir(int origem, int destino, List<Integer> caminhos) {
-        graficoDesenho.colorir(origem, destino, caminhos);
+    public void colorir(List<Integer> caminho) {
+        graficoDesenho.colorir(caminho);
     }
 
     public void descolorir() {

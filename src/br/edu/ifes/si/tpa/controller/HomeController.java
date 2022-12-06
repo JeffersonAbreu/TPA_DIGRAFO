@@ -1,6 +1,7 @@
 package br.edu.ifes.si.tpa.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -111,44 +112,23 @@ public class HomeController {
             lErro.setText("");
             int origem = Integer.valueOf(tfDe.getText());
             int destino = Integer.valueOf(tfPara.getText());
-            String title = "Menor Caminho";
             List<Integer> caminho = MenorCaminho.run(dashBoard.getDigrafo(), origem, destino);
+            String retorno = String.format("%2d para %2d:  \n", origem, destino);
+            String title = "Menor Caminho";
+            acaoRecolhe();
             if (caminho.isEmpty()) {
                 lErro.setText("Nenhum caminho encontrado!");
-            } else {
-                acaoRecolhe();
-                String retorno = "";
-                retorno += String.format("%2d para %2d:  \n", origem ,destino);
-                retorno += MenorCaminho.caminhoToString(caminho);
-                
-                
+                retorno += "\nNenhum caminho\nencontrado!";
                 paneResultExpande(title, retorno);
-                // TRANSFORMAR O retorno EM UMA LIST
-                dashBoard.colorir(origem, destino, caminho);
+            } else {
+                retorno += MenorCaminho.caminhoToString(caminho);
+                paneResultExpande(title, retorno);
+                // pinta o caminho e vertices
+                dashBoard.colorir(caminho);
             }
         } else {
             lErro.setText(text);
         }
-    }
-
-    private String validacaoPanel(TextField de, TextField para) {
-        String err = "";
-        int id;
-        try {
-            id = Integer.parseInt(de.getText());
-            dashBoard.getDigrafo().getVertice(id);
-        } catch (Exception e) {
-            err = "Origem: inválido!";
-            return err;
-        }
-        try {
-            id = Integer.parseInt(para.getText());
-            dashBoard.getDigrafo().getVertice(id);
-        } catch (Exception e) {
-            err = "Destino: inválido!";
-            return err;
-        }
-        return err;
     }
 
     @FXML
@@ -158,20 +138,40 @@ public class HomeController {
             lErro2.setText("");
             int origem = Integer.valueOf(tfDe2.getText());
             int destino = Integer.valueOf(tfPara2.getText());
-            String title = "Todos os Caminhos";
             List<List<Integer>> caminhos = TodosOsCaminhos.run(dashBoard.getDigrafo(), origem, destino);
+            String title = "Todos os Caminhos";
+            String resultado = String.format("%2d para %2d:  \n", origem, destino);
+            acaoRecolhe();
             if (caminhos.isEmpty()) {
                 lErro2.setText("Nenhum caminho encontrado!");
+                resultado += "\nNenhum caminho\n encontrado!";
+                paneResultExpande(title, resultado);
             } else {
-                acaoRecolhe();
-                String resultado = "";
-                resultado += String.format("%2d para %2d:  \n", origem ,destino);
                 for (List<Integer> caminho : caminhos) {
                     resultado += TodosOsCaminhos.caminhoToString(caminho) + "\n";
                 }
                 paneResultExpande(title, resultado);
-                // TRANSFORMAR O retorno EM UMA LIST
-                dashBoard.colorir(origem, destino, null);
+                // Pintar caminho e vertices
+                // for (List<Integer> caminho : caminhos) {
+                // dashBoard.colorir(caminho);
+                // }
+                // Faz pausadamente
+                List<Thread> tasks = new ArrayList<>();
+                for (List<Integer> caminho : caminhos) {
+                    tasks.add(new Thread(() -> dashBoard.colorir(caminho)));
+                }
+                new Thread(() -> {
+                    long tempoDeEspera = 1000;
+                    for (int i = 0; i < tasks.size(); i++) {
+                        try {
+                            Thread.sleep(tempoDeEspera);
+                        } catch (Exception e) {
+                        }
+                        tempoDeEspera += i * 1000;
+                        tasks.get(i).start();
+                    }
+                }).start();
+
             }
         } else {
             lErro2.setText(text);
@@ -180,6 +180,7 @@ public class HomeController {
 
     @FXML
     void actionTopArtigos(MouseEvent event) {
+        dashBoard.descolorir();
         if (validacao()) {
             dashBoard.descolorir();
             String title = "Top Artigos";
@@ -190,6 +191,7 @@ public class HomeController {
 
     @FXML
     void actionTopAutores(MouseEvent event) {
+        dashBoard.descolorir();
         if (validacao()) {
             dashBoard.descolorir();
             String title = "Top Autores";
@@ -249,6 +251,26 @@ public class HomeController {
 
     private void paneResultRecolhe() {
         paneResult.setPrefWidth(0);
+    }
+
+    private String validacaoPanel(TextField de, TextField para) {
+        String err = "";
+        int id;
+        try {
+            id = Integer.parseInt(de.getText());
+            dashBoard.getDigrafo().getVertice(id);
+        } catch (Exception e) {
+            err = "Origem: inválido!";
+            return err;
+        }
+        try {
+            id = Integer.parseInt(para.getText());
+            dashBoard.getDigrafo().getVertice(id);
+        } catch (Exception e) {
+            err = "Destino: inválido!";
+            return err;
+        }
+        return err;
     }
 
     /**

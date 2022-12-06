@@ -5,13 +5,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 import javax.imageio.ImageIO;
 
+import javafx.application.Platform;
+import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
-import javafx.scene.paint.Color;
 
 public class Grafico {
     private AnchorPane myPanel;
@@ -41,14 +44,16 @@ public class Grafico {
     private void loadMyPanel(int nV, int nA) {
         loadBalls(nV);
         loadLines();
-        myPanel.getChildren().clear();
-        for (Arrow line : listLines) {
-            myPanel.getChildren().add(line);
-        }
-        for (Ball ball : listBalls) {
-            myPanel.getChildren().add(ball);
-            myPanel.getChildren().add(ball.getTexto());
-        }
+        Platform.runLater(() -> {
+            myPanel.getChildren().clear();
+            for (Arrow line : listLines) {
+                myPanel.getChildren().add(line);
+            }
+            for (Ball ball : listBalls) {
+                myPanel.getChildren().add(ball);
+                myPanel.getChildren().add(ball.getTexto());
+            }
+        });
     }
 
     private void loadLines() {
@@ -126,24 +131,58 @@ public class Grafico {
     }
 
     public void descolorir() {
-        for (Ball ball : listBalls) {
-            ball.setSelected(false);
-        }
-        for (Arrow arrow : listLines) {
-            arrow.apaga();
-        }
+        Platform.runLater(() -> {
+            for (Ball ball : listBalls) {
+                ball.apaga();
+            }
+            for (Arrow arrow : listLines) {
+                arrow.apaga();
+            }
+        });
     }
 
-    public void colorir(int origem, int destino, List<Integer> caminhos) {
-        // origem
-        listBalls[origem].setStroke(Color.GOLD);
-        listBalls[origem].setStrokeWidth(3);
+    public void colorir(List<Integer> caminho) {
+        List<Thread> tasks = new ArrayList<>();
+        int origem = caminho.get(0);
+        int destino = 0;
+        Ball origemBall = getBall(origem);
+        // acende: vertice de origem
+        Platform.runLater(() -> origemBall.acende());
+        caminho.remove(0);
 
-        listBalls[destino].setStroke(Color.GOLD);
-        listBalls[destino].setStrokeWidth(3);
-
-        for (Arrow arrow : listLines) {
-            arrow.acende();
+        // Arestas
+        for (Integer i : caminho) {
+            destino = i;
+            for (Arrow arrow : listLines) {
+                if (arrow.isConection(origem, destino)) {
+                    Thread t = new Thread(() -> Platform.runLater(() -> arrow.acende()));
+                    tasks.add(t);
+                }
+            }
+            origem = destino;
         }
+        new Thread(() -> {
+            for (Thread thread : tasks) {
+                try {
+                    Thread.sleep(1000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                thread.start();
+            }
+        }).start();
+
+        // acende: vertice de destino
+        Ball destinoBall = getBall(destino);
+        Platform.runLater(() -> destinoBall.acende());
+    }
+
+    private Ball getBall(int id) {
+        for (Ball ball : listBalls) {
+            if (ball.getID() == id) {
+                return ball;
+            }
+        }
+        return null;
     }
 }

@@ -29,9 +29,8 @@ public class MenorCaminho {
 
     public static String caminhoToString(List<Integer> caminho) {
         String resultado = String.valueOf(caminho.get(0));
-        caminho.remove(0);
-        for (Integer i : caminho) {
-            resultado += " => " + String.format("%2d", i);
+        for (int i = 1; i < caminho.size(); i++) {
+            resultado += " => " + String.format("%2d", caminho.get(i));
         }
         return resultado;
     }
