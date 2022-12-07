@@ -42,7 +42,7 @@ public class Teste extends Application {
             DashBoard controller = loader.getController();
             
             primaryStage.show();
-            controller.start(new In(new File("_dados/Digrafo1.txt").getAbsolutePath()));
+            controller.start(new In(new File("_dados/Digrafo4.txt").getAbsolutePath()));
         } catch (IOException e) {
             e.printStackTrace();
         }
