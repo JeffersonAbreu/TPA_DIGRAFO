@@ -7,7 +7,7 @@
  *
  *****************************************************************************
  */
-package br.edu.ifes.si.tpa.model.design;
+package br.edu.ifes.si.tpa.model.domain;
 
 /**
  * Cada aresta é composta por dois números (que representam os vértices) e um peso.

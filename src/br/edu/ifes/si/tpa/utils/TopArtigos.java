@@ -2,10 +2,10 @@ package br.edu.ifes.si.tpa.utils;
 
 import java.io.File;
 
-import br.edu.ifes.si.tpa.model.design.Aresta;
 import br.edu.ifes.si.tpa.model.design.Digrafo;
 import br.edu.ifes.si.tpa.model.design.In;
 import br.edu.ifes.si.tpa.model.design.Vertice;
+import br.edu.ifes.si.tpa.model.domain.Aresta;
 
 public class TopArtigos {
      public static void main(String[] args) {

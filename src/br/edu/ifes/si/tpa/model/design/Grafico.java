@@ -10,6 +10,7 @@ import java.util.concurrent.Executors;
 
 import javax.imageio.ImageIO;
 
+import br.edu.ifes.si.tpa.model.domain.Aresta;
 import javafx.application.Platform;
 import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;

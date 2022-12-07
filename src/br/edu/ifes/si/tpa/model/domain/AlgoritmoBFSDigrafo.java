@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
-import br.edu.ifes.si.tpa.model.design.Aresta;
 import br.edu.ifes.si.tpa.model.design.Digrafo;
 
 public class AlgoritmoBFSDigrafo {

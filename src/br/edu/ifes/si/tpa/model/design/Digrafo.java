@@ -3,6 +3,8 @@ package br.edu.ifes.si.tpa.model.design;
 import java.util.HashMap;
 import java.util.StringTokenizer;
 
+import br.edu.ifes.si.tpa.model.domain.Aresta;
+
 public class Digrafo {
     private HashMap<Integer, Autor> autores = new HashMap<>();
     private int nVertices, nArestas;

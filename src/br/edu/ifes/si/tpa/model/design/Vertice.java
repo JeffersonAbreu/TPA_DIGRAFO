@@ -3,6 +3,8 @@ package br.edu.ifes.si.tpa.model.design;
 import java.util.ArrayList;
 import java.util.List;
 
+import br.edu.ifes.si.tpa.model.domain.Aresta;
+
 public class Vertice {
     private int ID;
     private Autor dono;
