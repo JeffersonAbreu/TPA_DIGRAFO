@@ -109,6 +109,7 @@ public class HomeController {
     void actionMenorCaminho(MouseEvent event) {
         String text = validacaoPanel(tfDe, tfPara);
         if (text.isBlank()) {
+            dashBoard.descolorir();
             lErro.setText("");
             int origem = Integer.valueOf(tfDe.getText());
             int destino = Integer.valueOf(tfPara.getText());
@@ -136,6 +137,7 @@ public class HomeController {
         String text = validacaoPanel(tfDe2, tfPara2);
         if (text.isBlank()) {
             lErro2.setText("");
+            dashBoard.descolorir();
             int origem = Integer.valueOf(tfDe2.getText());
             int destino = Integer.valueOf(tfPara2.getText());
             List<List<Integer>> caminhos = TodosOsCaminhos.run(dashBoard.getDigrafo(), origem, destino);
@@ -180,7 +182,6 @@ public class HomeController {
 
     @FXML
     void actionTopArtigos(MouseEvent event) {
-        dashBoard.descolorir();
         if (validacao()) {
             dashBoard.descolorir();
             String title = "Top Artigos";
@@ -191,7 +192,6 @@ public class HomeController {
 
     @FXML
     void actionTopAutores(MouseEvent event) {
-        dashBoard.descolorir();
         if (validacao()) {
             dashBoard.descolorir();
             String title = "Top Autores";
