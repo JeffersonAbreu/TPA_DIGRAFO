@@ -14,8 +14,8 @@ public class TodosOsCaminhos {
         List<List<Integer>> caminhos = TodosOsCaminhos.run(digrafo, 13, 1);
 
         if (caminhos.size() > 0) {
-            System.out.printf("tem %d caminhos\n",caminhos.size());
-            for(List<Integer> caminho: caminhos){
+            System.out.printf("tem %d caminhos\n", caminhos.size());
+            for (List<Integer> caminho : caminhos) {
                 System.out.println(caminhoToString(caminho));
             }
         }
@@ -25,8 +25,10 @@ public class TodosOsCaminhos {
         String resultado = String.valueOf(caminho.get(0));
         for (int i = 1; i < caminho.size(); i++) {
             resultado += " => " + String.format("%2d", caminho.get(i));
+            if (i % 4 == 0 && i != caminho.size() - 1)
+                resultado += "\n";
         }
-        return resultado;
+        return resultado += "\n";
     }
 
     public static List<List<Integer>> run(Digrafo digrafo, int origem, int destino) {

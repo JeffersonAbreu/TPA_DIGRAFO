@@ -31,7 +31,9 @@ public class MenorCaminho {
         String resultado = String.valueOf(caminho.get(0));
         for (int i = 1; i < caminho.size(); i++) {
             resultado += " => " + String.format("%2d", caminho.get(i));
+            if (i % 4 == 0 && i != caminho.size() - 1)
+                resultado += "\n";
         }
-        return resultado;
+        return resultado += "\n";
     }
 }
