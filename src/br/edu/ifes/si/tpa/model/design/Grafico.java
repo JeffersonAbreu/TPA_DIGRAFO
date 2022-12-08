@@ -5,14 +5,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.StringTokenizer;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 import javax.imageio.ImageIO;
 
 import br.edu.ifes.si.tpa.model.domain.Aresta;
 import javafx.application.Platform;
-import javafx.concurrent.Task;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.scene.image.Image;
 import javafx.scene.layout.AnchorPane;
@@ -95,6 +92,7 @@ public class Grafico {
 
         // se erro na leitura ou não existe
         if (aleatoria) {
+            System.out.println("erro na leitura ou não existe o arquivo\ngerando ondem aleatória!");
             for (int id = 0; id < n; id++) {
                 // posição aleatoria para a bola iniciar
                 posX = random.nextInt(Ball.RAIO(), (int) myPanel.getMinWidth() - Ball.RAIO());
@@ -128,7 +126,7 @@ public class Grafico {
             out.writeLine(ball.getID() + ":" + ball.getX() + ":" + ball.getY());
         }
         out.close();
-        System.out.println();
+        System.out.println("Salvando arquivo '.ini' com as localizações dos vértices!");
     }
 
     public void descolorir() {
